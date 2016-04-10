@@ -1,1 +1,4 @@
-{% extends "standard.twig" %}
+{% extends _request.isAjax ? "blank.twig" : "base.twig" %}
+{%block body%}
+	{{grid.render|raw}}
+{%endblock%}

@@ -1,6 +1,7 @@
 <?php
 
 namespace Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Entity()
@@ -25,6 +26,15 @@ class Form{
      **/
     protected $dir;
 
+    /**
+     * @OneToMany(targetEntity="FormField", mappedBy="form")
+     */
+    protected $fields;
+
+    public function __construct(){
+        $this->fields=new ArrayCollection();
+    }
+
 	public function getId(){
 		return $this->id;
 	}
@@ -46,6 +56,10 @@ class Form{
     public function setDir($dir){
         $this->dir=$dir;
         return $this;
+    }
+
+    public function getFields(){
+        return $this->fields;
     }
 
 }

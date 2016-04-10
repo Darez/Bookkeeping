@@ -45,6 +45,7 @@ Ite.run(function(config){
 
 	var route=config.getRoute();
 
+	route.addRule('^/managment/form$','ManagmentForm::index');
 	route.addRule('^/managment/form/add$','ManagmentForm::add');
 	route.addRule('^/managment/form/add/finish$','ManagmentForm::addFinish');
 

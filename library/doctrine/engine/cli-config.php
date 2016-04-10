@@ -11,19 +11,16 @@ $isDevMode = true;
 
 // the connection configuration
 $dbParams = array(
-    'driver'   => 'pdo_mysql',
-    'host'   => 'idealna-ekspozycja-mysql',
+    'driver'   => 'pdo_pgsql',
+    'host'   => 'bookkeeping-pgsql',
     'user'     => 'root',
     'password' => 'password',
     'dbname'   => 'db',
-    'charset' => 'utf8',
-    'driverOptions' => array(1002=>'SET NAMES utf8')
 
 );
 
 $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 $entityManager = EntityManager::create($dbParams, $config);
- $entityManager->getEventManager()->addEventSubscriber(new MysqlSessionInit("utf8", "utf8_unicode_ci"));
 
 // Any way to access the EntityManager from  your application
 $em = $entityManager;

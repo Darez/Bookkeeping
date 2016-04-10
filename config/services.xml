@@ -36,4 +36,6 @@
 	<service name="form" class="Arbor\Service\Form" />
 	<service name="grid" class="Arbor\Service\Grid" />
 
+	<service name="fpdf" class="Library\Fpdf\Service\FpdfService" />
+
 </content>

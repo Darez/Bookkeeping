@@ -240,12 +240,16 @@ Ite.registerModule('route',function(helper){
 							listener.call(null);
 						});
 
-						for(var index in prv.rules){
-							var rule=prv.rules[index];
-							if(prv.execute(index,href,rule[0],rule[1])){
-								return;
+						if(prv.contener){
+							for(var index in prv.rules){
+								var rule=prv.rules[index];
+								if(prv.execute(index,href,rule[0],rule[1])){
+									return;
+								}
 							}
+							
 						}
+
 
 						window.location.href=href;
 					}				

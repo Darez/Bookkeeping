@@ -15,23 +15,29 @@ class FormField{
 	 **/
 	protected $id;
 
+    /**
+     * @ManyToOne(targetEntity="Form",inversedBy="fields")
+     * @JoinColumn(name="form_id", referencedColumnName="id",nullable=false)
+     **/
+    protected $form;
+
     /** 
      * @Column(name="call_id",type="string") 
      **/
     protected $name;
 
     /** 
-     * @Column(type="int") 
+     * @Column(type="integer") 
      **/
     protected $page;
 
     /** 
-     * @Column(name="position_x",type="int") 
+     * @Column(name="position_x",type="integer") 
      **/
     protected $positionX;
 
     /** 
-     * @Column(name="position_y",type="int") 
+     * @Column(name="position_y",type="integer") 
      **/
     protected $positionY;
 
@@ -39,6 +45,14 @@ class FormField{
 		return $this->id;
 	}
 
+    public function getForm(){
+        return $this->form;
+    }
+
+    public function setForm($form){
+        $this->form=$form;
+        return $this;
+    }
 
     public function getName(){
         return $this->name;

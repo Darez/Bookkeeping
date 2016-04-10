@@ -405,12 +405,22 @@ class FormBuilder{
 					$field->setData('');
 				}
 			}
-			else if(preg_match('/^(.*?)\[(.*)\]$/',$field->getName(),$result)){
+			else if(preg_match('/^(.*?)(\[.*\])$/',$field->getName(),$result)){//array
+				if(!preg_match_all("/\[(.*?)\]/", $result[2], $resultDeep)){
+					throw new \Exception('Invalid field name.');//FIXME dedicate exception
+				}
+
+				$value=$storage[$result[1]];
+
+				foreach($resultDeep[1] as $deep){
+					$value=$value[$deep];
+				}
+
 				if($result[2]==''){
 					//FIXME autoincrement field
 				}
 				else{
-					$field->setData($storage[$result[1]][$result[2]]);
+					$field->setData($value);
 				}
 			}
 			else{//for checkbox

@@ -5,5 +5,6 @@
     <event bind="executeAction" class="Arbor\Event\Argument" method="onExecuteAction" />
     <event bind="executeAction" class="Arbor\Event\Authenticate" method="onExecuteAction"/>
     <event bind="executePresenter" class="Event\AppendRequest" method="onExecutePresenter"/>
+    <event bind="executePresenter" class="Event\AppendForm" method="onExecutePresenter"/>
 
 </content>

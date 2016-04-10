@@ -3,6 +3,10 @@ Ite.route().addController('ManagmentForm',function(){
 	var prv={};
 	var pub=this;
 
+	pub.index=function(){
+
+	};
+
 	pub.add=function(){
 
 		var form=Ite.get('form');
