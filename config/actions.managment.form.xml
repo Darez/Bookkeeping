@@ -16,6 +16,22 @@
 		<presenter class="Library\Twig\Presenter\Twig" />
 	</action>
 
+	<action controller="Managment\FormController" method="edit" >
+		<route pattern="\/managment\/form\/edit\/(\d+)(\/|)" />
+		<presenter class="Library\Twig\Presenter\Twig" />
+		<argument storage="url" name="id" pattern="\/managment\/form\/edit\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+	<action controller="Managment\FormController" method="editFinish" >
+		<route pattern="\/managment\/form\/edit\/finish(\/|)" />
+		<presenter class="Library\Twig\Presenter\Twig" />
+	</action>
+
+	<action controller="Managment\FormController" method="addFinish" >
+		<route pattern="\/managment\/form\/add\/finish(\/|)" />
+		<presenter class="Library\Twig\Presenter\Twig" />
+	</action>
+
 	<action controller="Managment\FormController" method="addFinishImage" >
 		<route pattern="\/managment\/form\/add\/finish\/image\/view-[0-9]+\.jpg(\/|)" />
 		<presenter class="Arbor\Presenter\File" />

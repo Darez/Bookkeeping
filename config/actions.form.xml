@@ -7,4 +7,14 @@
 		<argument storage="url" name="id" pattern="\/form\/(\d+)(\/|)" mapper="Mapper\Form" />
 	</action>
 
+	<action controller="FormController" method="finish" >
+		<route pattern="\/form\/finish(\/|)" />
+		<presenter class="Library\Twig\Presenter\Twig" />
+	</action>
+
+	<action controller="FormController" method="finishPdf" >
+		<route pattern="\/form\/finish\.pdf" />
+		<presenter class="Arbor\Presenter\File" />
+	</action>
+
 </content>

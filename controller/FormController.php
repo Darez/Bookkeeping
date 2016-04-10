@@ -50,8 +50,26 @@ class FormController extends Controller{
 			$this->preparePage($pdf,$i,$fieldMap,$data['field']);
 		}
 
+		$dir=__DIR__."/../cache/".$this->getRequest()->getSession()->getId();
+		if(!file_exists($dir)){
+			mkdir($dir,0777,true);
+		}
+		$pdf->Output($dir.'/output.pdf', "F");
 
-		$pdf->Output(__DIR__."/../cache/my_modified_pdf.pdf", "F");		
+		return $this->redirect('/form/finish');
+	}
+
+	public function finish(){
+		return compact('dir');
+	}
+
+	public function finishPdf(){
+		$file=__DIR__."/../cache/".$this->getRequest()->getSession()->getId().'/output.pdf';
+
+		$response=new Response();
+		$response->setHeader('Content-Type','application/pdf');
+		$response->setContent($file);
+		return $response;
 	}
 
 	private function preparePage($pdf,$page,$fieldMap,$data){
@@ -61,12 +79,11 @@ class FormController extends Controller{
 			if($fieldMap->getPage()!=$page){
 				continue;
 			}
-			$pdf->SetX($fieldMap->getPositionX()*$scale);
-			$pdf->SetY($fieldMap->getPositionY()*$scale);
 
-			$pdf->SetFont('helvetica','N',10);
+			$pdf->SetFont('freesans','N',$fieldMap->getFontSize());
+			$pdf->setFontSpacing($fieldMap->getSpace()*$scale);
 			//Print centered cell with a text in it
-			$pdf->Text($fieldMap->getPositionX()*$scale,$fieldMap->getPositionY()*$scale, $data[$index]);
+			$pdf->Text($fieldMap->getPositionX()*$scale,($fieldMap->getPositionY()+2)*$scale, $data[$index]);
 
 		}
 

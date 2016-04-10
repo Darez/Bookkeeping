@@ -41,6 +41,21 @@ class FormField{
      **/
     protected $positionY;
 
+    /** 
+     * @Column(name="font_size",type="integer") 
+     **/
+    protected $fontSize;
+
+    /** 
+     * @Column(name="max_length",type="integer",nullable=true) 
+     **/
+    protected $maxLength;
+
+    /** 
+     * @Column(name="space",type="float") 
+     **/
+    protected $space;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -87,6 +102,33 @@ class FormField{
 
     public function setPositionY($positionY){
         $this->positionY=$positionY;
+        return $this;
+    }
+
+    public function getFontSize(){
+        return $this->fontSize;
+    }
+
+    public function setFontSize($fontSize){
+        $this->fontSize=$fontSize;
+        return $this;
+    }
+
+    public function getMaxLength(){
+        return $this->maxLength;
+    }
+
+    public function setMaxLength($maxLength){
+        $this->maxLength=$maxLength;
+        return $this;
+    }
+
+    public function getSpace(){
+        return $this->space;
+    }
+
+    public function setSpace($space){
+        $this->space=$space;
         return $this;
     }
 

@@ -81,6 +81,9 @@ class FormController extends Controller{
 			$formField->setPage($record['page']);
 			$formField->setPositionX($record['positionX']);
 			$formField->setPositionY($record['positionY']);
+			$formField->setFontSize($record['fontSize']);
+			$formField->setMaxLength($record['maxLength']);
+			$formField->setSpace($record['space']);
 			$formField->setForm($form);
 			$this->persist($formField);
 		}
@@ -101,6 +104,10 @@ class FormController extends Controller{
 	public function edit($entity){
 		$form=$this->createForm();
 		$form->removeField('file');
+
+		$form->setData(array(
+			'name'=>$entity->getName()
+			));
 		$form->submit($this->getRequest());
 		if(!$form->isValid()){
 			return compact('form');
@@ -119,6 +126,7 @@ class FormController extends Controller{
 		$sessionData=array(
 			'name'=>$data['name'],
 			'fileRaw'=>$dir.'/'.'raw.pdf',
+			'id'=>$entity->getId(),
 			);
 		$fileView=$this->convertPdfToImage($sessionData['fileRaw'],$dir);
 		$sessionData=$sessionData+compact('fileView');
@@ -129,6 +137,61 @@ class FormController extends Controller{
 
 	}
 
+	public function editFinish(){
+		$request=$this->getRequest();
+		$session=$request->getSession();
+		$sessionData=null;
+		try{
+			$sessionData=$session->get('form.add');
+		}
+		catch(ValueNotFoundException $e){
+			return $this->redirect('/managment/form/add');
+		}
+
+		$form=$this->cast('Mapper\Form',$sessionData['id']);
+
+		if($request->getType()!="POST"){
+			$sessionData['entity']=$form;
+			return $sessionData;
+		}
+
+		$dir=$form->getDir();
+
+		$form->setName($sessionData['name']);
+
+		$form->setDir($dir);
+		$this->persist($form);
+		$data=$request->getData();
+		$data=$data['data'];
+
+		//clear
+		foreach($form->getFields() as $formField){
+			$this->remove($formField);
+		}
+
+		foreach($data as $record){ //TODO validate fields!
+			$formField=new \Entity\FormField();
+			$formField->setName($record['name']);
+			$formField->setPage($record['page']);
+			$formField->setPositionX($record['positionX']);
+			$formField->setPositionY($record['positionY']);
+			$formField->setForm($form);
+			$this->persist($formField);
+		}
+
+		$this->flush();
+
+		if(file_exists($dir)){
+			$this->rrmdir($dir);
+		}
+		mkdir($dir,0777,true);
+
+		rename($sessionData['fileRaw'], $dir.'/raw.pdf');//TODO move view files?
+
+		return $this->redirect('/managment/form');
+
+
+	}
 	public function addFinishImage($image){
 		$session=$this->getRequest()->getSession();
 		$dir=__DIR__.'/../../cache/'.$session->getId();

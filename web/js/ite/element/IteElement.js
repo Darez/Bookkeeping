@@ -326,6 +326,14 @@ Ite.registerElement('IteElement','*',function(helper,htmlElement,parent){
 		return attribute;
 	}
 
+	pub.setFontSize=function(size){
+		pub.getDOMElement().style.fontSize=size+'px';
+	};
+
+	pub.setLetterSpacing=function(letterSpacing){
+		pub.getDOMElement().style.letterSpacing=letterSpacing+'px';
+	};
+
 	pub.setAttribute=function(name,value){
 		return pub.getDOMElement().setAttribute(name,value);
 	}

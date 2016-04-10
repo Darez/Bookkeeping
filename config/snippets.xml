@@ -11,6 +11,7 @@
     <snippet class="Library\Doctrine\Snippet\Doctrine" method="executeQuery" />
     <snippet class="Library\Doctrine\Snippet\Doctrine" method="escape" />
     <snippet class="Library\Doctrine\Snippet\Doctrine" method="getConnection" />
+    <snippet class="Library\Doctrine\Snippet\Doctrine" method="remove" />
     <snippet class="Arbor\Snippet\Mapper" method="cast" />
     <snippet class="Arbor\Snippet\Validator" method="validate" />
     <snippet class="Arbor\Snippet\Route" method="redirect" />
