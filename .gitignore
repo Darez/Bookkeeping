@@ -2,3 +2,4 @@
 /config/variables.xml
 /config/migrate.*.txt
 /cache/*
+/upload/*
