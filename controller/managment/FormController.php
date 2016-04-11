@@ -68,9 +68,11 @@ class FormController extends Controller{
 
 		$form=new \Entity\Form();
 		$form->setName($sessionData['name']);
+		
 		do{
 			$dir=__DIR__.'/../../upload/'.md5(microtime()+mt_srand());
 		}while(file_exists($dir));
+
 		$form->setDir($dir);
 		$this->persist($form);
 		$data=$request->getData();
@@ -82,7 +84,9 @@ class FormController extends Controller{
 			$formField->setPositionX($record['positionX']);
 			$formField->setPositionY($record['positionY']);
 			$formField->setFontSize($record['fontSize']);
-			$formField->setMaxLength($record['maxLength']);
+			if($record['maxLength']){
+				$formField->setMaxLength($record['maxLength']);				
+			}
 			$formField->setSpace($record['space']);
 			$formField->setForm($form);
 			$this->persist($formField);
@@ -94,7 +98,12 @@ class FormController extends Controller{
 			mkdir($dir,0777,true);
 		}
 
-		rename($sessionData['fileRaw'], $dir.'/raw.pdf');//TODO move view files?
+		//move files
+		$cacheDir=__DIR__.'/../../cache/'.$session->getId();
+		rename($sessionData['fileRaw'], $dir.'/raw.pdf');
+		foreach($sessionData['fileView'] as $fileView){			
+			rename($cacheDir.'/'.$fileView, $dir.'/'.$fileView);
+		}
 
 		return $this->redirect('/managment/form');
 

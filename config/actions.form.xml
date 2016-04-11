@@ -17,4 +17,12 @@
 		<presenter class="Arbor\Presenter\File" />
 	</action>
 
+	<action controller="FormController" method="image" >
+		<route pattern="\/form\/image\/\d+\/view-[0-9]+\.jpg" />
+		<presenter class="Arbor\Presenter\File" />
+		<argument storage="url" name="form" pattern="\/form\/image\/(\d+)\/(view-[0-9]+\.jpg)" mapper="Mapper\Form" />
+		<argument storage="url" name="image" pattern="\/form\/image\/\d+\/(view-[0-9]+\.jpg)" />
+
+	</action>
+
 </content>

@@ -4,7 +4,7 @@ namespace Controller;
 use Arbor\Core\Controller;
 use Arbor\Component\Form\TextField;
 use Arbor\Component\Form\FileField;
-use Formatter\BootstrapFormFormatter;
+use Formatter\PdfEditorFormFormatter;
 use Arbor\Exception\ValueNotFoundException;
 use Arbor\Provider\Response;
 use Formatter\BasicGridFormatter;
@@ -15,26 +15,30 @@ use Arbor\Component\Grid\Column;
 class FormController extends Controller{
 	
 	public function index($entity){
+
+		$pages=$this->getViewFile($entity);
 		$form=$this->getService('form')->create();
 		$form->setValidatorService($this->getService('validator'));
-		$form->setFormatter(new BootstrapFormFormatter());
+		$form->setFormatter(new PdfEditorFormFormatter());
 
 		$fields=$entity->getFields();
 		$fieldMap=array();
 		foreach($entity->getFields() as $kField=>$field){
 			$form->addField(new TextField(array(
-				'name'=>'field['.$kField.']'
-				,'label'=>$field->getName()
-				,'required'=>true
+				'data-name'=>'field['.$kField.']'
+				,'data-max-length'=>$field->getMaxLength()
+				,'data-page'=>$field->getPage()
+				,'data-font-size'=>$field->getFontSize()
+				,'data-position-x'=>$field->getPositionX()
+				,'data-position-y'=>$field->getPositionY()
+				,'data-space'=>$field->getSpace()
 				)));
 
 			$fieldMap[$kField]=$field;
 		}
 
-		$form->submit($this->getRequest());
-
 		if(!$form->isValid()){
-			return compact('form');			
+			return compact('form','pages');
 		}
 
 		$data=$form->getData();
@@ -42,11 +46,13 @@ class FormController extends Controller{
 
 		//Set the source PDF file
 		$pagecount = $pdf->setSourceFile($entity->getDir().'/raw.pdf');
+		// $fontname = \TCPDF_FONTS::addTTFfont(__DIR__.'/../web/fonts/cousine/Cousine-Regular.ttf');
 
 		for($i=1; $i<=$pagecount; $i++){
 			$pdf->AddPage();
 			$tpl = $pdf->importPage($i);
 			$pdf->useTemplate($tpl);
+
 			$this->preparePage($pdf,$i,$fieldMap,$data['field']);
 		}
 
@@ -57,6 +63,22 @@ class FormController extends Controller{
 		$pdf->Output($dir.'/output.pdf', "F");
 
 		return $this->redirect('/form/finish');
+	}
+
+	private function getViewFile($entity){
+		$opendir=opendir($entity->getDir());
+		while($readdir=readdir($opendir)){
+			if(!preg_match('/^view-\d\.jpg$/', $readdir)){
+				continue;
+			}
+			$result[]=$entity->getId().'/'.$readdir;
+
+		}
+
+		closedir($opendir);
+		sort($result);
+		return $result;
+
 	}
 
 	public function finish(){
@@ -72,6 +94,13 @@ class FormController extends Controller{
 		return $response;
 	}
 
+	public function image($entity,$image){
+		$dir=$entity->getDir();
+		$response=new Response();
+		$response->setContent($dir.'/'.$image);
+		return $response;
+	}
+
 	private function preparePage($pdf,$page,$fieldMap,$data){
 		//scale
 		$scale=$pdf->getPageWidth()/595;
@@ -80,14 +109,15 @@ class FormController extends Controller{
 				continue;
 			}
 
-			$pdf->SetFont('freesans','N',$fieldMap->getFontSize());
+			$pdf->SetFont('cousine','N',$fieldMap->getFontSize());
 			$pdf->setFontSpacing($fieldMap->getSpace()*$scale);
 			//Print centered cell with a text in it
-			$pdf->Text($fieldMap->getPositionX()*$scale,($fieldMap->getPositionY()+2)*$scale, $data[$index]);
+			$pdf->Text(($fieldMap->getPositionX()-2)*$scale,($fieldMap->getPositionY()+2)*$scale, $data[$index]);
 
 		}
 
 
 	}
+
 
 }

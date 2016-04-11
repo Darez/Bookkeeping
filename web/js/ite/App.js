@@ -48,7 +48,8 @@ Ite.run(function(config){
 	route.addRule('^/managment/form$','ManagmentForm::index');
 	route.addRule('^/managment/form/add$','ManagmentForm::add');
 	route.addRule('^/managment/form/add/finish$','ManagmentForm::addFinish');
-	route.addRule('^/managment/form/edit/\d$','ManagmentForm::edit');
+	route.addRule('^/managment/form/edit/\\d+$','ManagmentForm::edit');
 	route.addRule('^/managment/form/edit/finish$','ManagmentForm::editFinish');
+	route.addRule('^/form/\\d+$','Form::index');
 
 });
