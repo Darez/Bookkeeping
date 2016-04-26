@@ -146,6 +146,17 @@ class FormController extends Controller{
 
 	}
 
+	public function remove($entity){
+		$formFields=$this->find('FormField',array('form'=>$entity));
+		foreach($formFields as $formField){
+			$this->getDoctrine()->getEntityManager()->remove($formField);
+		}
+		$this->getDoctrine()->getEntityManager()->remove($entity);
+		$this->flush();
+		return $this->redirect('/managment/form');
+	}
+
+
 	public function editFinish(){
 		$request=$this->getRequest();
 		$session=$request->getSession();

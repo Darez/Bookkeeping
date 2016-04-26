@@ -46,8 +46,10 @@ Ite.registerElement('ItePdfPreviewElement','[role="pdf-preview"]',function(helpe
 
 	prv.render=function(){
 		pub.addClass('pdf-preview');
-		var template=`
-		<DIV class="pdf-preview-workspace"></DIV>
+		var template=`<FORM method="post">
+			<DIV class="pdf-preview-workspace"></DIV>
+			<BUTTON type="submit" class="pdf-editor-button" role="confirm">Confirm</BUTTON>
+		</FORM>
 		`;
 
 		pub.setHtml(template);

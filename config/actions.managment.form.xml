@@ -39,5 +39,11 @@
 
 	</action>
 
+	<action controller="Managment\FormController" method="remove" >
+		<route pattern="\/managment\/form\/remove\/(\d+)(\/|)" />
+		<presenter class="Library\Twig\Presenter\Twig" />
+		<argument storage="url" name="id" pattern="\/managment\/form\/remove\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
 
 </content>

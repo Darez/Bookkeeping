@@ -17,14 +17,13 @@ class FormController extends Controller{
 	public function index($entity){
 
 		$pages=$this->getViewFile($entity);
-		$form=$this->getService('form')->create();
-		$form->setValidatorService($this->getService('validator'));
-		$form->setFormatter(new PdfEditorFormFormatter());
+		$previewForm=$this->createForm();
+		$validForm=$this->createForm();
 
 		$fields=$entity->getFields();
 		$fieldMap=array();
 		foreach($entity->getFields() as $kField=>$field){
-			$form->addField(new TextField(array(
+			$previewForm->addField(new TextField(array(
 				'data-name'=>'field['.$kField.']'
 				,'data-max-length'=>$field->getMaxLength()
 				,'data-page'=>$field->getPage()
@@ -33,21 +32,24 @@ class FormController extends Controller{
 				,'data-position-y'=>$field->getPositionY()
 				,'data-space'=>$field->getSpace()
 				)));
+			$validForm->addField(new TextField(array(
+				'name'=>'field['.$kField.']',
+				'maxlength'=>$field->getMaxLength(),
+				)));
 
 			$fieldMap[$kField]=$field;
 		}
-
-		if(!$form->isValid()){
-			return compact('form','pages');
+		$validForm->submit($this->getRequest());
+		if(!$validForm->isValid()){
+			return compact('previewForm','pages');
 		}
 
-		$data=$form->getData();
+		$data=$validForm->getData();
 		$pdf =$this->getService('fpdf')->create();
 
 		//Set the source PDF file
 		$pagecount = $pdf->setSourceFile($entity->getDir().'/raw.pdf');
 		// $fontname = \TCPDF_FONTS::addTTFfont(__DIR__.'/../web/fonts/cousine/Cousine-Regular.ttf');
-
 		for($i=1; $i<=$pagecount; $i++){
 			$pdf->AddPage();
 			$tpl = $pdf->importPage($i);
@@ -63,6 +65,13 @@ class FormController extends Controller{
 		$pdf->Output($dir.'/output.pdf', "F");
 
 		return $this->redirect('/form/finish');
+	}
+
+	private function createForm(){
+		$form=$this->getService('form')->create();
+		$form->setValidatorService($this->getService('validator'));
+		$form->setFormatter(new PdfEditorFormFormatter());
+		return $form;
 	}
 
 	private function getViewFile($entity){
