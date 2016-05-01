@@ -1,0 +1,6 @@
+{% extends _request.isAjax ? "blank.twig" : "base.twig" %}
+{%block body%}
+	<object data="/form/finish.pdf" type="application/pdf" class="pdf-view">
+	  alt : <a href="/form/finish.pdf">test.pdf</a>
+	</object>
+{%endblock%}

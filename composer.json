@@ -1,0 +1,23 @@
+{
+    "name": "itephp/project",
+    "description": "Basic project structure.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michal Tomczak",
+            "email": "php@iteracja.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+        ,"itephp/framework": "^0.1"
+        ,"itephp/doctrine-bridge": "^0.1"
+        ,"itephp/twig-bridge": "^0.1"
+        ,"itephp/tcpdf-bridge": "^0.1"
+        },
+    "autoload": {
+        "psr-4": { "": "src" }
+    },
+    "minimum-stability": "dev"
+}

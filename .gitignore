@@ -1,5 +1,7 @@
+/vendor/*
 /dev
 /config/variables.xml
 /config/migrate.*.txt
+/config/cli-config.php
 /cache/*
 /upload/*

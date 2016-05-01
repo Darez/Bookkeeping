@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<action controller="FormController" method="index" >
+		<route pattern="\/form\/(\d+)(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+		<argument storage="url" name="id" pattern="\/form\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+	<action controller="FormController" method="finish" >
+		<route pattern="\/form\/finish(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+	</action>
+
+	<action controller="FormController" method="finishPdf" >
+		<route pattern="\/form\/finish\.pdf" />
+		<presenter class="ItePHP\Presenter\File" />
+	</action>
+
+	<action controller="FormController" method="image" >
+		<route pattern="\/form\/image\/\d+\/view-[0-9]+\.jpg" />
+		<presenter class="ItePHP\Presenter\File" />
+		<argument storage="url" name="form" pattern="\/form\/image\/(\d+)\/(view-[0-9]+\.jpg)" mapper="Mapper\Form" />
+		<argument storage="url" name="image" pattern="\/form\/image\/\d+\/(view-[0-9]+\.jpg)" />
+
+	</action>
+
+</content>

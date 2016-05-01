@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<action controller="Managment\FormController" method="index" >
+		<route pattern="\/managment\/form(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+	</action>
+
+	<action controller="Managment\FormController" method="add" >
+		<route pattern="\/managment\/form\/add(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+	</action>
+
+	<action controller="Managment\FormController" method="addFinish" >
+		<route pattern="\/managment\/form\/add\/finish(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+	</action>
+
+	<action controller="Managment\FormController" method="edit" >
+		<route pattern="\/managment\/form\/edit\/(\d+)(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+		<argument storage="url" name="id" pattern="\/managment\/form\/edit\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+	<action controller="Managment\FormController" method="editFinish" >
+		<route pattern="\/managment\/form\/edit\/finish(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+	</action>
+
+	<action controller="Managment\FormController" method="addFinish" >
+		<route pattern="\/managment\/form\/add\/finish(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+	</action>
+
+	<action controller="Managment\FormController" method="addFinishImage" >
+		<route pattern="\/managment\/form\/add\/finish\/image\/view-[0-9]+\.jpg(\/|)" />
+		<presenter class="ItePHP\Presenter\File" />
+		<argument storage="url" name="id" pattern="\/managment\/form\/add\/finish\/image\/(view-[0-9]+\.jpg)(\/|)" />
+
+	</action>
+
+	<action controller="Managment\FormController" method="remove" >
+		<route pattern="\/managment\/form\/remove\/(\d+)(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+		<argument storage="url" name="id" pattern="\/managment\/form\/remove\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+
+</content>
