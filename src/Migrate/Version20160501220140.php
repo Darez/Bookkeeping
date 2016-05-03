@@ -7,6 +7,8 @@ class Version20160501220140{
 	
 	public function up(Migrate $migrate){
 
+		$this->copy(ITE_ROOT.'/extend',ITE_ROOT.'/vendor/tecnickcom/tcpdf');
+
 		$sql="CREATE SEQUENCE forms_id_seq INCREMENT BY 1 MINVALUE 1 START 1;
 			CREATE SEQUENCE form_fields_id_seq INCREMENT BY 1 MINVALUE 1 START 1;
 			CREATE TABLE forms (id INT NOT NULL, call_id VARCHAR(255) NOT NULL, dir TEXT NOT NULL, PRIMARY KEY(id));
@@ -28,6 +30,32 @@ class Version20160501220140{
 
 		$stmt=$migrate->getConnection();
 		$stmt->exec($sql);
+
+	}
+
+	private function copy($from,$to){
+		$open=opendir($from);
+		while($file=readdir($open)){
+			if(in_array($file, array('.','..'))){
+				continue;
+			}
+			$fromPath=$from.'/'.$file;
+			$toPath=$to.'/'.$file;
+
+			if(is_dir($fromPath)){
+				if(!file_exists($toPath)){
+					mkdir($toPath);
+				}
+
+				$this->copy($fromPath,$toPath);
+			}
+			else{
+				copy($fromPath,$toPath);
+			}
+
+		}
+		closedir($open);
+
 
 	}
 

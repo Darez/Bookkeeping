@@ -22,11 +22,6 @@ class FormField{
     protected $form;
 
     /** 
-     * @Column(name="call_id",type="string") 
-     **/
-    protected $name;
-
-    /** 
      * @Column(type="integer") 
      **/
     protected $page;
@@ -56,6 +51,11 @@ class FormField{
      **/
     protected $space;
 
+    /** 
+     * @Column(name="width",type="float") 
+     **/
+    protected $width;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -66,15 +66,6 @@ class FormField{
 
     public function setForm($form){
         $this->form=$form;
-        return $this;
-    }
-
-    public function getName(){
-        return $this->name;
-    }
-
-    public function setName($name){
-        $this->name=$name;
         return $this;
     }
 
@@ -129,6 +120,15 @@ class FormField{
 
     public function setSpace($space){
         $this->space=$space;
+        return $this;
+    }
+
+    public function getWidth(){
+        return $this->width;
+    }
+
+    public function setWidth($width){
+        $this->width=$width;
         return $this;
     }
 

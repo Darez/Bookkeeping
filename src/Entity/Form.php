@@ -17,7 +17,7 @@ class Form{
 	protected $id;
 
     /** 
-     * @Column(name="call_id",type="string") 
+     * @Column(name="name",type="string") 
      **/
     protected $name;
 

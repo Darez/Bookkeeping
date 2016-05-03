@@ -31,7 +31,7 @@ class FormController extends Controller{
 		$data=$form->getData();
 
 		$session=$this->getRequest()->getSession();
-		$dir=__DIR__.'/../../../cache/'.$session->getId();
+		$dir=ITE_ROOT.'/cache/'.$session->getId();
 		if(file_exists($dir)){
 			$this->rrmdir($dir);
 		}
@@ -70,7 +70,7 @@ class FormController extends Controller{
 		$form->setName($sessionData['name']);
 		
 		do{
-			$dir=__DIR__.'/../../../upload/'.md5(microtime()+mt_srand());
+			$dir=ITE_ROOT.'/upload/'.md5(microtime()+mt_srand());
 		}while(file_exists($dir));
 
 		$form->setDir($dir);
@@ -79,11 +79,11 @@ class FormController extends Controller{
 		$data=$data['data'];
 		foreach($data as $record){ //TODO validate fields!
 			$formField=new \Entity\FormField();
-			$formField->setName($record['name']);
 			$formField->setPage($record['page']);
 			$formField->setPositionX($record['positionX']);
 			$formField->setPositionY($record['positionY']);
 			$formField->setFontSize($record['fontSize']);
+			$formField->setWidth($record['width']);
 			if($record['maxLength']){
 				$formField->setMaxLength($record['maxLength']);				
 			}
@@ -99,7 +99,7 @@ class FormController extends Controller{
 		}
 
 		//move files
-		$cacheDir=__DIR__.'/../../../cache/'.$session->getId();
+		$cacheDir=ITE_ROOT.'/cache/'.$session->getId();
 		rename($sessionData['fileRaw'], $dir.'/raw.pdf');
 		foreach($sessionData['fileView'] as $fileView){			
 			rename($cacheDir.'/'.$fileView, $dir.'/'.$fileView);
@@ -125,7 +125,7 @@ class FormController extends Controller{
 		$data=$form->getData();
 
 		$session=$this->getRequest()->getSession();
-		$dir=__DIR__.'/../../cache/'.$session->getId();
+		$dir=ITE_ROOT.'/cache/'.$session->getId();
 		if(file_exists($dir)){
 			$this->rrmdir($dir);
 		}
@@ -214,7 +214,7 @@ class FormController extends Controller{
 	}
 	public function addFinishImage($image){
 		$session=$this->getRequest()->getSession();
-		$dir=__DIR__.'/../../../cache/'.$session->getId();
+		$dir=ITE_ROOT.'/cache/'.$session->getId();
 		$response=new Response();
 		$response->setContent($dir.'/'.$image);
 		return $response;
