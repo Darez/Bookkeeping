@@ -1,9 +1,9 @@
 {% extends _request.isAjax ? "blank.twig" : "base.twig" %}
 {%block body%}
 
-<div role="pdf-preview">
+<div role="pdf-editor" data-preview-mode>
 {%for page in pages%}
-	<div role="pdf-preview-page" data-image="/form/image/{{page}}"></div>
+	<div role="pdf-editor-page" data-image="/form/image/{{page}}"></div>
 {%endfor%}
 
 	{{previewForm.renderFields|raw}}

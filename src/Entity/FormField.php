@@ -51,11 +51,6 @@ class FormField{
      **/
     protected $space;
 
-    /** 
-     * @Column(name="width",type="float") 
-     **/
-    protected $width;
-
 	public function getId(){
 		return $this->id;
 	}
@@ -120,15 +115,6 @@ class FormField{
 
     public function setSpace($space){
         $this->space=$space;
-        return $this;
-    }
-
-    public function getWidth(){
-        return $this->width;
-    }
-
-    public function setWidth($width){
-        $this->width=$width;
         return $this;
     }
 

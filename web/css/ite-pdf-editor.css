@@ -13,9 +13,12 @@
 
 .pdf-editor-workspace{
   max-height: 500px;
-  margin-right: 300px;
   overflow: auto;
   background-color: #ADADAD;
+}
+
+.pdf-editor-edit-mode .pdf-editor-workspace{
+  margin-right: 300px;
 }
 
 .pdf-editor-workspace *{

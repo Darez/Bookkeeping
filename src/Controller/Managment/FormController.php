@@ -83,7 +83,6 @@ class FormController extends Controller{
 			$formField->setPositionX($record['positionX']);
 			$formField->setPositionY($record['positionY']);
 			$formField->setFontSize($record['fontSize']);
-			$formField->setWidth($record['width']);
 			if($record['maxLength']){
 				$formField->setMaxLength($record['maxLength']);				
 			}
@@ -197,7 +196,6 @@ class FormController extends Controller{
 			$formField->setMaxLength($record['maxLength']);
 			$formField->setSpace($record['space']);
 			$formField->setFontSize($record['fontSize']);
-			$formField->setWidth($record['width']);
 			$formField->setForm($form);
 			$this->persist($formField);
 		}

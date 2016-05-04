@@ -12,7 +12,7 @@ class PdfEditorFormFormatter implements FormFormatter{
 	 */
 	public function renderField(FormField $field){
 		$tags=$field->getTags();
-		$template='<div role="pdf-preview-component" ';
+		$template='<div role="pdf-editor-component" ';
 
 		foreach($tags as $kTag=>$tag){
 			if(substr($kTag, 0,5)=='data-'){

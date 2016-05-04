@@ -121,7 +121,7 @@ class FormController extends Controller{
 			$pdf->SetFont('cousine','N',$fieldMap->getFontSize());
 			$pdf->setFontSpacing($fieldMap->getSpace()*$scale);
 			//Print centered cell with a text in it
-			$pdf->Text(($fieldMap->getPositionX()-2)*$scale,($fieldMap->getPositionY()+2)*$scale, $data[$index]);
+			$pdf->Text(($fieldMap->getPositionX()+$fieldMap->getSpace()-2)*$scale,($fieldMap->getPositionY()+2)*$scale, $data[$index]);
 
 		}
 

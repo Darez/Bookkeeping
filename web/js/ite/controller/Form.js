@@ -4,7 +4,7 @@ Ite.route().addController('Form',function(){
 	var pub=this;
 
 	pub.index=function(){
-		var pdfPreview=Ite.get('[role="pdf-preview"]');
+		var pdfEditor=Ite.get('[role="pdf-editor"]');
 	};
 
 });
