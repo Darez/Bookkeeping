@@ -339,6 +339,10 @@ var Ite= new (function Ite(){
 
 	pub.addEventMouseMove=prv.helper.addEvent(this,'mousemove',true);
 
+	pub.addEventMouseUp=prv.helper.addEvent(this,'mouseup',true);
+
+	pub.addEventMouseDown=prv.helper.addEvent(this,'mousedown',true);
+
 	pub.addEventRightClick=prv.helper.addEvent(this,'contextmenu');
 
 })();

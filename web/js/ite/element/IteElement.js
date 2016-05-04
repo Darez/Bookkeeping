@@ -87,7 +87,6 @@ Ite.registerElement('IteElement','*',function(helper,htmlElement,parent){
 	}
 
 	pub.getHeight=function(){
-		console.log(pub.getDOMElement());
 		return pub.getDOMElement().offsetHeight;
 	}
 

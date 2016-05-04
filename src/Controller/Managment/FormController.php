@@ -136,6 +136,7 @@ class FormController extends Controller{
 			'name'=>$data['name'],
 			'fileRaw'=>$dir.'/'.'raw.pdf',
 			'id'=>$entity->getId(),
+			'cacheDir'=>$dir,
 			);
 		$fileView=$this->convertPdfToImage($sessionData['fileRaw'],$dir);
 		$sessionData=$sessionData+compact('fileView');
@@ -179,7 +180,6 @@ class FormController extends Controller{
 
 		$form->setName($sessionData['name']);
 
-		$form->setDir($dir);
 		$this->persist($form);
 		$data=$request->getData();
 		$data=$data['data'];
@@ -191,10 +191,13 @@ class FormController extends Controller{
 
 		foreach($data as $record){ //TODO validate fields!
 			$formField=new \Entity\FormField();
-			$formField->setName($record['name']);
 			$formField->setPage($record['page']);
 			$formField->setPositionX($record['positionX']);
 			$formField->setPositionY($record['positionY']);
+			$formField->setMaxLength($record['maxLength']);
+			$formField->setSpace($record['space']);
+			$formField->setFontSize($record['fontSize']);
+			$formField->setWidth($record['width']);
 			$formField->setForm($form);
 			$this->persist($formField);
 		}
@@ -206,7 +209,15 @@ class FormController extends Controller{
 		}
 		mkdir($dir,0777,true);
 
+		if(!file_exists($dir)){
+			mkdir($dir,0777,true);
+		}
+
 		rename($sessionData['fileRaw'], $dir.'/raw.pdf');//TODO move view files?
+		foreach($sessionData['fileView'] as $fileView){			
+			rename($sessionData['cacheDir'].'/'.$fileView, $dir.'/'.$fileView);
+		}
+
 
 		return $this->redirect('/managment/form');
 

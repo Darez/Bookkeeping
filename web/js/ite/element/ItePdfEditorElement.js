@@ -33,6 +33,9 @@ Ite.registerElement('ItePdfEditorElement','[role="pdf-editor"]',function(helper,
 				'page':this.getAttribute('data-page')
 				,'positionX':this.getAttribute('data-position-x')
 				,'positionY':this.getAttribute('data-position-y')
+				,'fontSize':this.getAttribute('data-font-size')
+				,'maxLength':this.getAttribute('data-max-length')
+				,'space':this.getAttribute('data-space')
 			});
 		});
 
@@ -62,70 +65,8 @@ Ite.registerElement('ItePdfEditorElement','[role="pdf-editor"]',function(helper,
 
 		prv.metaData['components'].each(function(info,index){
 			var component=new ItePdfEditorComponent(pub,info);
-			pub.getPage(component.getPage()).addComponent(component);
-			prv.focusComponent=component;
-			prv.addComponentToUI(component);
-
+			prv.ui.add(component);
 		});
-
-	};
-
-	prv.addComponentToUI=function(component){
-		var container=pub.get('.pdf-editor-info');
-		var index=prv.maxUIIndex++;
-		var template=`
-			<DIV>
-				<TABLE>
-					<TR><TH>Page</TH></TR>
-					<TR><TD><INPUT type="number" role="page" required name="data[${index}][page]" min="1" /></TD></TR>
-					<TR><TH>Position x</TH></TR>
-					<TR><TD><INPUT type="number" role="positionX" required name="data[${index}][positionX]" min="0" /></TD></TR>
-					<TR><TH>Position y</TH></TR>
-					<TR><TD><INPUT type="number" role="positionY" required name="data[${index}][positionY]" min="0" /></TD></TR>
-					<TR><TH>Font size</TH></TR>
-					<TR><TD><INPUT type="number" role="fontSize" required name="data[${index}][fontSize]" min="1" /></TD></TR>
-					<TR><TH>Max length</TH></TR>
-					<TR><TD><INPUT type="number" role="maxLength" name="data[${index}][maxLength]" min="1" /></TD></TR>
-					<TR><TH>Space</TH></TR>
-					<TR><TD><INPUT type="number" role="space" name="data[${index}][space]" min="0" /></TD></TR>
-					<TR><TD><INPUT type="text" role="exampleText" name="data[${index}][exampleText]" /></TD></TR>
-					<TR><TD><DIV class="pdf-editor-button" role="remove">Remove</DIV></TD></TR>
-				</TABLE>
-				<INPUT type="hide" role="width" name="data[${index}][width]" />
-			</DIV>
-		`;
-		var item=Ite.createObject(template);
-		container.append(item,0);
-
-		item.get('[role="page"]').setValue(component.getPage());
-		item.get('[role="positionX"]').setValue(component.getPositionX());
-		item.get('[role="positionY"]').setValue(component.getPositionY());
-		item.get('[role="fontSize"]').setValue(component.getFontSize());
-		item.get('[role="maxLength"]').setValue(component.getMaxLength());
-		item.get('[role="space"]').setValue(component.getSpace());
-		item.get('[role="width"]').setValue(component.getWidth());
-
-		item.get('[role="page"]').addEventChange(prv.callbackPage(component));
-		item.get('[role="positionX"]').addEventChange(prv.callbackUIComponent(component,'setPositionX'));
-		item.get('[role="positionY"]').addEventChange(prv.callbackUIComponent(component,'setPositionY'));
-		item.get('[role="fontSize"]').addEventChange(prv.callbackUIComponent(component,'setFontSize'))
-		item.get('[role="maxLength"]').addEventChange(prv.callbackUIComponent(component,'setMaxLength'))
-		item.get('[role="space"]').addEventChange(prv.callbackUIComponent(component,'setSpace'))
-
-		var muteEnter=function(e){
-			var event=e.getOrigin();
-			if(event.keyCode==13){//enter
-				this.fireEvent('change');
-				e.setSystemHandle(false);
-			}
-		};
-
-		container.getAll('input').each(function(){
-			this.addEventKeyDown(muteEnter);
-
-		});
-
-		item.get('[role="remove"]').addEventClick(prv.callbackRemove(item,component));
 
 	};
 
@@ -301,38 +242,36 @@ function ItePdfEditorComponent(parent,config){
 
 		}
 
-		// prv.bind();
+		prv.parent.getPage(pub.getPage()).addComponent(pub);
+
+		prv.bind();
 	};
 
 	prv.bind=function(){
 		var isDown=false;
 		var vectorX=0;
 		var vectorY;
-		var offsetTop=0;
-		var element=pub.getElement();
-		while(element!=null){
-
-			offsetTop=element.getDOMElement().offsetTop;
-			element=element.getParent();
-		}
+		var parentOffset=pub.getElement().getParent('.pdf-editor-page').getOffsetX();
+		var offsetY=prv.element.getOffsetY();
+		var offsetX=prv.element.getOffsetX();
 
 		pub.getElement().addEventMouseDown(function(e){
 			isDown=true;
 		});
-		pub.getElement().addEventMouseUp(function(e){
+		Ite.addEventMouseUp(function(e){
 			isDown=false;
 		});
 
 		Ite.addEventMouseMove(function(e){
-			console.log(isDown);
 			if(!isDown){
 				return;
 			}
 
 			var mouseX = e.getOrigin().clientX + document.body.scrollLeft;
 			var mouseY = e.getOrigin().clientY + document.body.scrollTop;
-			pub.getElement().setPositionX(offsetTop-mouseX);
-			pub.getElement().setPositionY(mouseY);
+
+			pub.setPositionX(parentOffset+mouseX-offsetX+pub.getElement().getWidth());
+			pub.setPositionY(mouseY-offsetY+pub.getElement().getHeight());
 
 		});
 
@@ -422,6 +361,12 @@ function ItePdfEditorUI(parent){
 	prv.maxUIIndex=0;
 	prv.focusComponent;
 
+	pub.add=function(component){
+		prv.focusComponent=component;
+		new ItePdfEditorInterface(prv.element.get('.pdf-editor-info'),prv.maxUIIndex++,component,prv.callbackInterface());
+
+	};
+
 	prv.init=function(){
 		prv.element=prv.render();
 		prv.bind();
@@ -456,10 +401,9 @@ function ItePdfEditorUI(parent){
 
 	prv.callbackAdd=function(){
 		return function(){
-			var component=new ItePdfEditorComponent(pub);
+			var component=new ItePdfEditorComponent(prv.parent);
 			prv.parent.getPage(1).addComponent(component);
-			prv.focusComponent=component;
-			new ItePdfEditorInterface(prv.element.get('.pdf-editor-info'),prv.maxUIIndex++,component,prv.callbackInterface());
+			pub.add(component);
 		}
 	};
 
@@ -537,7 +481,8 @@ function ItePdfEditorInterface(container,index,component,callbacks){
 
 	prv.callbackChange=function(){
 		return function(field,value){
-			prv.element.get('[role="width"]').setValue(prv.component.getWidth());
+			prv.element.get('[role="width"]').setValue(prv.component.getWidth(),false);
+			prv.element.get('[role="'+field+'"]').setValue(value,false);
 		};
 	};
 
@@ -567,8 +512,8 @@ function ItePdfEditorInterface(container,index,component,callbacks){
 		container.append(prv.element,0);
 
 		prv.element.get('[role="page"]').setValue(component.getPage());
-		prv.element.get('[role="positionX"]').setValue(component.getPositionX());
-		prv.element.get('[role="positionY"]').setValue(component.getPositionY());
+		prv.element.get('[role="positionX"]').setValue(component.getPositionX(),false);
+		prv.element.get('[role="positionY"]').setValue(component.getPositionY(),false);
 		prv.element.get('[role="fontSize"]').setValue(component.getFontSize());
 		prv.element.get('[role="maxLength"]').setValue(component.getMaxLength());
 		prv.element.get('[role="space"]').setValue(component.getSpace());

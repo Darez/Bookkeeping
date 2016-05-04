@@ -18,6 +18,16 @@
   background-color: #ADADAD;
 }
 
+.pdf-editor-workspace *{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;    
+  
+}
+
 .pdf-editor-ui{
   width: 300px;
   height: 100%;
@@ -97,5 +107,12 @@
   border: 1px solid #000000;
   background-color: rgba(0,0,0,0.2);
   font-family: "Cousine";
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;    
+  cursor: pointer;
 }
 
