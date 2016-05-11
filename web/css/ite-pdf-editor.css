@@ -119,3 +119,7 @@
   cursor: pointer;
 }
 
+.pdf-editor-component-width{
+  position: absolute;
+  visibility: hidden;
+}

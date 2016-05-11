@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "56a50096917fef981d2e84df97c0f396",
-    "content-hash": "64fb7ce3e8c33f79ccdea593d4092fb8",
+    "hash": "00cc193827ffdcc9bbb61ba441b82a2a",
+    "content-hash": "cb1299eb2c7bab733bb85288cb2cb197",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -289,12 +289,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "3df22ccdf20a68fafe34cb1ae452aee7cde7d442"
+                "reference": "1c6f63dff60f1f8c073087833edae2da96d37287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/3df22ccdf20a68fafe34cb1ae452aee7cde7d442",
-                "reference": "3df22ccdf20a68fafe34cb1ae452aee7cde7d442",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1c6f63dff60f1f8c073087833edae2da96d37287",
+                "reference": "1c6f63dff60f1f8c073087833edae2da96d37287",
                 "shasum": ""
             },
             "require": {
@@ -352,7 +352,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-04-03 03:13:05"
+            "time": "2016-05-09 19:16:16"
         },
         {
             "name": "doctrine/inflector",
@@ -648,16 +648,16 @@
         },
         {
             "name": "itephp/framework",
-            "version": "0.1.4",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itephp/framework.git",
-                "reference": "3cc9debc86f6b918d4d17c219453bc9f1ced7881"
+                "reference": "14a5dcb2f5084739c2dd8b3fc69faac90eb16596"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itephp/framework/zipball/3cc9debc86f6b918d4d17c219453bc9f1ced7881",
-                "reference": "3cc9debc86f6b918d4d17c219453bc9f1ced7881",
+                "url": "https://api.github.com/repos/itephp/framework/zipball/14a5dcb2f5084739c2dd8b3fc69faac90eb16596",
+                "reference": "14a5dcb2f5084739c2dd8b3fc69faac90eb16596",
                 "shasum": ""
             },
             "require": {
@@ -680,20 +680,20 @@
                 }
             ],
             "description": "The ItePHP framework.",
-            "time": "2016-05-01 11:57:05"
+            "time": "2016-05-11 19:32:18"
         },
         {
             "name": "itephp/tcpdf-bridge",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itephp/tcpdf-bridge.git",
-                "reference": "882226f42c4eac6ffebc6ecf127e2ef330a9905f"
+                "reference": "83084dd767ef1811fc27f0012ad2454f03b4ff7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itephp/tcpdf-bridge/zipball/882226f42c4eac6ffebc6ecf127e2ef330a9905f",
-                "reference": "882226f42c4eac6ffebc6ecf127e2ef330a9905f",
+                "url": "https://api.github.com/repos/itephp/tcpdf-bridge/zipball/83084dd767ef1811fc27f0012ad2454f03b4ff7e",
+                "reference": "83084dd767ef1811fc27f0012ad2454f03b4ff7e",
                 "shasum": ""
             },
             "require": {
@@ -717,20 +717,20 @@
                 }
             ],
             "description": "The ItePHP TCPDF bridge.",
-            "time": "2016-05-01 13:55:37"
+            "time": "2016-05-01 14:48:33"
         },
         {
             "name": "itephp/twig-bridge",
-            "version": "0.1.2",
+            "version": "0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itephp/twig-bridge.git",
-                "reference": "562596bc533e15f1d110030f0d0e7d804ef5a9e4"
+                "reference": "d4f90c55cdc2b11b743e302492f58abf966641e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itephp/twig-bridge/zipball/562596bc533e15f1d110030f0d0e7d804ef5a9e4",
-                "reference": "562596bc533e15f1d110030f0d0e7d804ef5a9e4",
+                "url": "https://api.github.com/repos/itephp/twig-bridge/zipball/d4f90c55cdc2b11b743e302492f58abf966641e8",
+                "reference": "d4f90c55cdc2b11b743e302492f58abf966641e8",
                 "shasum": ""
             },
             "require": {
@@ -754,7 +754,79 @@
                 }
             ],
             "description": "The ItePHP Twig bridge.",
-            "time": "2016-05-01 12:20:41"
+            "time": "2016-05-11 19:36:18"
+        },
+        {
+            "name": "phpoffice/phpexcel",
+            "version": "1.9.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "3bb541c610e742b0cdb9ad7e64933fca0d3367a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/3bb541c610e742b0cdb9ad7e64933fca0d3367a4",
+                "reference": "3bb541c610e742b0cdb9ad7e64933fca0d3367a4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.5.*",
+                "phpunit/phpunit": "4.6.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "suggest": {
+                "dompdf/dompdf": "Option for rendering PDF with PDF Writer",
+                "ext-gd": "*",
+                "ext-zip": "*",
+                "jpgraph/jpgraph": "Option for rendering charts, or including charts with PDF or HTML Writers",
+                "mpdf/mpdf": "Option for rendering PDF with PDF Writer",
+                "pclzip/pclzip": "2.8.2",
+                "tecnick.com/tcpdf": "Option for rendering PDF with PDF Writer"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPExcel\\": "src/PhpSpreadsheet"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Erik Tilt"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://rootslabs.net"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2016-04-14 22:20:07"
         },
         {
             "name": "symfony/console",
@@ -762,12 +834,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c8fc338326817cf79b60840a802b019aa6a8588f"
+                "reference": "eac900eacbefd68a29fa1f183590568cb5f6ffd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c8fc338326817cf79b60840a802b019aa6a8588f",
-                "reference": "c8fc338326817cf79b60840a802b019aa6a8588f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/eac900eacbefd68a29fa1f183590568cb5f6ffd5",
+                "reference": "eac900eacbefd68a29fa1f183590568cb5f6ffd5",
                 "shasum": ""
             },
             "require": {
@@ -814,7 +886,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-28 09:49:00"
+            "time": "2016-05-03 18:48:46"
         },
         {
             "name": "symfony/polyfill-mbstring",

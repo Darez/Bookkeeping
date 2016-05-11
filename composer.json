@@ -14,10 +14,14 @@
         ,"itephp/framework": "^0.1"
         ,"itephp/doctrine-bridge": "^0.1"
         ,"itephp/twig-bridge": "^0.1"
+        ,"phpoffice/phpexcel": "^1.8"
         ,"itephp/tcpdf-bridge": "^0.1"
         },
     "autoload": {
-        "psr-4": { "": "src" }
+        "psr-4": { 
+            "": "src/"
+            ,"Test\\": "test/"
+        }
     },
     "minimum-stability": "dev"
 }

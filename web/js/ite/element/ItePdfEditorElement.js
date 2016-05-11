@@ -183,6 +183,11 @@ function ItePdfEditorComponent(parent,config,editMode){
 	pub.setFontSize=function(fontSize){
 		prv.fontSize=parseFloat(fontSize);
 		pub.getElement().get('input').setFontSize(prv.fontSize);
+
+		pub.getElement().get('div').setFontSize(prv.fontSize);
+
+		prv.recalculateWidth();
+
 		prv.callbackChange.each(function(){
 			this.call(null,'fontSize',fontSize);
 		});
@@ -197,9 +202,7 @@ function ItePdfEditorComponent(parent,config,editMode){
 		for(var i=0; i<prv.maxLength; i++){
 			data.push('0');
 		}
-		if(prv.editMode){
-			prv.setExampleText(data.join(''));
-		}
+		prv.setExampleText(data.join(''));
 		prv.recalculateWidth();
 		prv.callbackChange.each(function(){
 			this.call(null,'maxLength',prv.maxLength);
@@ -210,6 +213,12 @@ function ItePdfEditorComponent(parent,config,editMode){
 		prv.space=parseFloat(space);
 		pub.getElement().get('input').setLetterSpacing(prv.space);
 		pub.getElement().get('input').getDOMElement().style.padding='0 0 0 '+prv.space+'px';
+
+		pub.getElement().get('div').setLetterSpacing(prv.space);
+		pub.getElement().get('div').getDOMElement().style.padding='0 0 0 '+prv.space+'px';
+
+		prv.recalculateWidth();
+
 		prv.callbackChange.each(function(){
 			this.call(null,'space',space);
 		});
@@ -218,15 +227,18 @@ function ItePdfEditorComponent(parent,config,editMode){
 	prv.setExampleText=function(exampleText){
 		prv.exampleText=exampleText;
 		var element=pub.getElement();
-		element.get('input').setValue(exampleText);
+		element.get('div').setText(exampleText);
+		if(prv.editMode){
+			element.get('input').setValue(exampleText);
+		}
 
 	};
 
 
 	prv.recalculateWidth=function(){
-		var width=(pub.getMaxLength()+1)*pub.getSpace();
-		width+=(pub.getFontSize()*0.6)*pub.getMaxLength();
-		prv.element.get('input').setWidth(width);
+		var element=pub.getElement().get('div');
+		
+		prv.element.get('input').setWidth(element.getWidth()+2);
 	};
 
 	pub.getData=function(){
@@ -249,6 +261,9 @@ function ItePdfEditorComponent(parent,config,editMode){
 			prv.index=config.index; //only preview mode
 		}
 		prv.element=Ite.createObject(prv.getTemplate());
+
+		prv.parent.getPage(pub.getPage()).addComponent(pub);
+
 		pub.setFontSize(12);
 		pub.setMaxLength(1);
 		if(config){
@@ -260,7 +275,6 @@ function ItePdfEditorComponent(parent,config,editMode){
 			pub.setFontSize(config.fontSize);
 		}
 
-		prv.parent.getPage(pub.getPage()).addComponent(pub);
 
 		if(prv.editMode){
 			prv.bind();
@@ -305,6 +319,7 @@ function ItePdfEditorComponent(parent,config,editMode){
 		return `
 			<div class="pdf-editor-component">
 				<input class="pdf-editor-component" type="text" name='field[${prv.index}]' disabled /> 
+				<div class="pdf-editor-component-width"></div>
 			</div>
 		`;
 
