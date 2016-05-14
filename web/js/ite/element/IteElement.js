@@ -40,11 +40,13 @@ Ite.registerElement('IteElement','*',function(helper,htmlElement,parent){
 	}
 
 	pub.getPositionX=function(){
-		return pub.getDOMElement().style.left||0;
+		var position=pub.getDOMElement().style.left||0+'px';
+		return parseInt(position.substring(0,position.length-2));
 	}
 
 	pub.getPositionY=function(){
-		return pub.getDOMElement().style.top||0;
+		var position=pub.getDOMElement().style.top||0+'px';
+		return parseInt(position.substring(0,position.length-2));
 	}
 
 	pub.setPositionX=function(x){

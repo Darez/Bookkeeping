@@ -51,6 +51,9 @@ class FormController extends Controller{
 		$pagecount = $pdf->setSourceFile($entity->getDir().'/raw.pdf');
 		// $fontname = \TCPDF_FONTS::addTTFfont(__DIR__.'/../web/fonts/cousine/Cousine-Regular.ttf');
 		for($i=1; $i<=$pagecount; $i++){
+			$pdf->SetPrintHeader(false);
+			$pdf->SetPrintFooter(false);
+			$pdf->SetAutoPageBreak(TRUE, 0);
 			$pdf->AddPage();
 			$tpl = $pdf->importPage($i);
 			$pdf->useTemplate($tpl);
@@ -113,15 +116,16 @@ class FormController extends Controller{
 	private function preparePage($pdf,$page,$fieldMap,$data){
 		//scale
 		$scale=$pdf->getPageWidth()/595;
+		// echo $scale; exit;
 		foreach($fieldMap as $index=>$fieldMap){
 			if($fieldMap->getPage()!=$page){
 				continue;
 			}
 
 			$pdf->SetFont('cousine','N',$fieldMap->getFontSize());
-			$pdf->setFontSpacing($fieldMap->getSpace()*$scale);
+			$pdf->setFontSpacing(($fieldMap->getSpace())*$scale);
 			//Print centered cell with a text in it
-			$pdf->Text(($fieldMap->getPositionX()+$fieldMap->getSpace()-2)*$scale,($fieldMap->getPositionY()+2)*$scale, $data[$index]);
+			$pdf->Text(($fieldMap->getPositionX()+$fieldMap->getSpace())*$scale,($fieldMap->getPositionY()+4)*$scale, $data[$index]);
 
 		}
 

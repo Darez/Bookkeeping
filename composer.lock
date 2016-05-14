@@ -360,12 +360,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
+                "reference": "803a2ed9fea02f9ca47cd45395089fe78769a392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/803a2ed9fea02f9ca47cd45395089fe78769a392",
+                "reference": "803a2ed9fea02f9ca47cd45395089fe78769a392",
                 "shasum": ""
             },
             "require": {
@@ -419,7 +419,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2016-05-12 17:23:41"
         },
         {
             "name": "doctrine/instantiator",
@@ -535,12 +535,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "59a041095183f188faac6bc784074f4f88475a4a"
+                "reference": "b3aa8254e480926adeb2a2df30a0b0ac8328d639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/59a041095183f188faac6bc784074f4f88475a4a",
-                "reference": "59a041095183f188faac6bc784074f4f88475a4a",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b3aa8254e480926adeb2a2df30a0b0ac8328d639",
+                "reference": "b3aa8254e480926adeb2a2df30a0b0ac8328d639",
                 "shasum": ""
             },
             "require": {
@@ -606,20 +606,20 @@
                 "database",
                 "orm"
             ],
-            "time": "2016-04-21 15:26:15"
+            "time": "2016-05-13 02:47:26"
         },
         {
             "name": "itephp/doctrine-bridge",
-            "version": "0.1.2",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itephp/doctrine-bridge.git",
-                "reference": "4e05814c5dded7afbaebc4e5467e3caa96bc7918"
+                "reference": "48031d376c9dbcb4d424645fc0d3dfc33337e0e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itephp/doctrine-bridge/zipball/4e05814c5dded7afbaebc4e5467e3caa96bc7918",
-                "reference": "4e05814c5dded7afbaebc4e5467e3caa96bc7918",
+                "url": "https://api.github.com/repos/itephp/doctrine-bridge/zipball/48031d376c9dbcb4d424645fc0d3dfc33337e0e9",
+                "reference": "48031d376c9dbcb4d424645fc0d3dfc33337e0e9",
                 "shasum": ""
             },
             "require": {
@@ -644,20 +644,20 @@
                 }
             ],
             "description": "The ItePHP Doctrin bridge.",
-            "time": "2016-05-01 12:08:03"
+            "time": "2016-05-14 17:39:23"
         },
         {
             "name": "itephp/framework",
-            "version": "0.1.6",
+            "version": "0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itephp/framework.git",
-                "reference": "14a5dcb2f5084739c2dd8b3fc69faac90eb16596"
+                "reference": "607ed4f13763a3f75a2daac473612d1a9a8da99a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itephp/framework/zipball/14a5dcb2f5084739c2dd8b3fc69faac90eb16596",
-                "reference": "14a5dcb2f5084739c2dd8b3fc69faac90eb16596",
+                "url": "https://api.github.com/repos/itephp/framework/zipball/607ed4f13763a3f75a2daac473612d1a9a8da99a",
+                "reference": "607ed4f13763a3f75a2daac473612d1a9a8da99a",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +680,7 @@
                 }
             ],
             "description": "The ItePHP framework.",
-            "time": "2016-05-11 19:32:18"
+            "time": "2016-05-14 17:37:09"
         },
         {
             "name": "itephp/tcpdf-bridge",
@@ -762,12 +762,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PHPExcel.git",
-                "reference": "3bb541c610e742b0cdb9ad7e64933fca0d3367a4"
+                "reference": "12590bbf1e5f82562085a70b48ee377e428dfaff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/3bb541c610e742b0cdb9ad7e64933fca0d3367a4",
-                "reference": "3bb541c610e742b0cdb9ad7e64933fca0d3367a4",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/12590bbf1e5f82562085a70b48ee377e428dfaff",
+                "reference": "12590bbf1e5f82562085a70b48ee377e428dfaff",
                 "shasum": ""
             },
             "require": {
@@ -826,7 +826,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2016-04-14 22:20:07"
+            "time": "2016-05-14 08:29:38"
         },
         {
             "name": "symfony/console",
@@ -834,12 +834,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "eac900eacbefd68a29fa1f183590568cb5f6ffd5"
+                "reference": "8b60330aaef91db2a7252c7fc1ac8141c4cf6ce9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/eac900eacbefd68a29fa1f183590568cb5f6ffd5",
-                "reference": "eac900eacbefd68a29fa1f183590568cb5f6ffd5",
+                "url": "https://api.github.com/repos/symfony/console/zipball/8b60330aaef91db2a7252c7fc1ac8141c4cf6ce9",
+                "reference": "8b60330aaef91db2a7252c7fc1ac8141c4cf6ce9",
                 "shasum": ""
             },
             "require": {
@@ -859,7 +859,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -886,7 +886,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-03 18:48:46"
+            "time": "2016-05-13 18:13:23"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1016,12 +1016,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "f167cc0a65ab0a2a53558c9385b4a324c1a36b02"
+                "reference": "71ad9ff322e9ef99465ccc26f704d706d76e0eea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f167cc0a65ab0a2a53558c9385b4a324c1a36b02",
-                "reference": "f167cc0a65ab0a2a53558c9385b4a324c1a36b02",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/71ad9ff322e9ef99465ccc26f704d706d76e0eea",
+                "reference": "71ad9ff322e9ef99465ccc26f704d706d76e0eea",
                 "shasum": ""
             },
             "require": {
@@ -1069,7 +1069,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-04-24 13:54:56"
+            "time": "2016-05-13 19:46:43"
         }
     ],
     "packages-dev": [],

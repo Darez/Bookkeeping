@@ -124,10 +124,17 @@ function ItePdfEditorComponent(parent,config,editMode){
 	prv.element;
 	prv.index;
 	prv.callbackChange=new IteArray();
+	prv.callbackFocus=new IteArray();
+	prv.color;
 
 	pub.addEventChange=function(callback){
 		prv.callbackChange.push(callback);
 	};
+
+	pub.addEventFocus=function(callback){
+		prv.callbackFocus.push(callback);
+	};
+
 
 	pub.getPage=function(){
 		return prv.page;
@@ -234,6 +241,10 @@ function ItePdfEditorComponent(parent,config,editMode){
 
 	};
 
+	pub.getBackgroundColor=function(){
+		return prv.color;
+	};
+
 
 	prv.recalculateWidth=function(){
 		var element=pub.getElement().get('div');
@@ -249,6 +260,7 @@ function ItePdfEditorComponent(parent,config,editMode){
 			,'fontSize':pub.getFontSize()
 			,'maxLength':pub.getMaxLength()
 			,'exampleText':pub.getExampleText()
+			,'space':pub.getSpace()
 		};
 	};
 
@@ -262,8 +274,6 @@ function ItePdfEditorComponent(parent,config,editMode){
 		}
 		prv.element=Ite.createObject(prv.getTemplate());
 
-		prv.parent.getPage(pub.getPage()).addComponent(pub);
-
 		pub.setFontSize(12);
 		pub.setMaxLength(1);
 		if(config){
@@ -275,9 +285,12 @@ function ItePdfEditorComponent(parent,config,editMode){
 			pub.setFontSize(config.fontSize);
 		}
 
+		prv.parent.getPage(pub.getPage()).addComponent(pub);
+		prv.recalculateWidth();
 
 		if(prv.editMode){
 			prv.bind();
+			prv.drawColor();
 		}
 		else{
 			prv.element.get('input').setDisabled(false);
@@ -289,30 +302,53 @@ function ItePdfEditorComponent(parent,config,editMode){
 		var isDown=false;
 		var vectorX=0;
 		var vectorY;
-		var parentOffset=pub.getElement().getParent('.pdf-editor-page').getOffsetX();
+		var parentOffsetX=pub.getElement().getParent('.pdf-editor-page').getOffsetX();
 		var offsetY=prv.element.getOffsetY();
 		var offsetX=prv.element.getOffsetX();
-
+		var mouseX=0;
+		var mouseY=0;
 		pub.getElement().addEventMouseDown(function(e){
+			var button=e.getOrigin().button;
+			if(button!=0){
+				return;
+			}
+
 			isDown=true;
+			offsetX=mouseX-prv.element.getOffsetX()+prv.element.getOffsetX()-prv.element.getPositionX();
+			offsetY=mouseY-prv.element.getOffsetY()+prv.element.getOffsetY()-prv.element.getPositionY();
 		});
 		Ite.addEventMouseUp(function(e){
 			isDown=false;
 		});
 
 		Ite.addEventMouseMove(function(e){
+			mouseX = e.getOrigin().clientX + document.body.scrollLeft;
+			mouseY = e.getOrigin().clientY + document.body.scrollTop;
 			if(!isDown){
 				return;
 			}
 
-			var mouseX = e.getOrigin().clientX + document.body.scrollLeft;
-			var mouseY = e.getOrigin().clientY + document.body.scrollTop;
-
-			pub.setPositionX(parentOffset+mouseX-offsetX+pub.getElement().getWidth());
-			pub.setPositionY(mouseY-offsetY+pub.getElement().getHeight());
+			pub.setPositionX(mouseX-offsetX);
+			pub.setPositionY(mouseY-offsetY);
 
 		});
 
+		//focus
+		pub.getElement().addEventRightClick(function(){
+			prv.callbackFocus.each(function(){
+				this.call(null);
+			});
+		});
+
+	};
+
+	prv.drawColor=function(){
+		prv.color=[prv.drawOct(),prv.drawOct(),prv.drawOct()];
+		prv.element.get('input').setBackgroundColor(prv.color[0],prv.color[1],prv.color[2],0.5);
+	};
+
+	prv.drawOct=function(){
+		return parseInt(Math.random()*255);
 	};
 
 	prv.getTemplate=function(){
@@ -440,8 +476,15 @@ function ItePdfEditorUI(parent){
 
 	prv.callbackAdd=function(){
 		return function(){
-			var component=new ItePdfEditorComponent(prv.parent,null,true);
-			prv.parent.getPage(1).addComponent(component);
+			var config=null;
+			if(prv.focusComponent){
+				config=prv.focusComponent.getData();
+				config['positionX']=0;
+				config['positionY']=0;
+			}
+
+			var component=new ItePdfEditorComponent(prv.parent,config,true);
+			prv.parent.getPage(component.getPage()).addComponent(component);
 			pub.add(component);
 		}
 	};
@@ -491,6 +534,7 @@ function ItePdfEditorInterface(container,index,component,callbacks){
 	prv.init=function(){
 		prv.render();
 		prv.component.addEventChange(prv.callbackChange());
+		prv.component.addEventFocus(prv.callbackFocus());
 	};
 
 	prv.callbackRemove=function(container,component){
@@ -500,6 +544,12 @@ function ItePdfEditorInterface(container,index,component,callbacks){
 			}
 
 			prv.element.remove();
+		};
+	};
+
+	prv.callbackFocus=function(){
+		return function(field,value){
+			prv.element.get('input').focus();
 		};
 	};
 
@@ -546,6 +596,10 @@ function ItePdfEditorInterface(container,index,component,callbacks){
 			</DIV>
 		`;
 		prv.element=Ite.createObject(template);
+		//set color
+		var color=component.getBackgroundColor();
+		prv.element.setBackgroundColor(color[0],color[1],color[2],0.5);
+
 		container.append(prv.element,0);
 
 		prv.element.get('[role="page"]').setValue(component.getPage());
