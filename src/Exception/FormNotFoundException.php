@@ -2,7 +2,7 @@
 
 namespace Exception;
 
-use Arbor\Core\Exception;
+use ItePHP\Core\Exception;
 
 /**
  * @package Exception

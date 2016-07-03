@@ -1,6 +1,10 @@
 {% extends _request.isAjax ? "blank.twig" : "base.twig" %}
 {%block body%}
-	<object data="/form/finish.pdf" type="application/pdf" class="pdf-view">
+	<object data="/form/finish.pdf?view=1" type="application/pdf" class="pdf-view">
 	  alt : <a href="/form/finish.pdf">test.pdf</a>
 	</object>
+	<div class="row">
+		<a href="/form/finish.pdf" class="btn btn-primary">Download pdf</a>
+		&nbsp;<a href="/form/finish.scbk" class="btn btn-default">Download metadata</a>
+	</div>
 {%endblock%}

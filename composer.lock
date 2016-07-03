@@ -4,9 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "00cc193827ffdcc9bbb61ba441b82a2a",
-    "content-hash": "cb1299eb2c7bab733bb85288cb2cb197",
+    "hash": "efdac81d897a8a0cea2280ec4b7d03c8",
+    "content-hash": "136640dc0a441cb681379401f9d6f871",
     "packages": [
+        {
+            "name": "chuyskywalker/phpaes",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chuyskywalker/phpaes.git",
+                "reference": "a54cc52fd660652a480c39a07fa9db78015995ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chuyskywalker/phpaes/zipball/a54cc52fd660652a480c39a07fa9db78015995ac",
+                "reference": "a54cc52fd660652a480c39a07fa9db78015995ac",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mcrypt": "*",
+                "ext-openssl": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phpaes\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Minard",
+                    "homepage": "http://jrm.cc/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP AES -- Accurate & Fast AES in PHP",
+            "homepage": "https://github.com/chuyskywalker/phpaes",
+            "keywords": [
+                "aes",
+                "encryption",
+                "mcrypt",
+                "openssl"
+            ],
+            "time": "2015-11-26 02:40:30"
+        },
         {
             "name": "doctrine/annotations",
             "version": "dev-master",
@@ -77,32 +126,33 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "dev-master",
+            "version": "1.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "4e3b8b9464d511eccbefe07cef94c275bce7e434"
+                "reference": "fb3f5917781cf95863d3fd4d2595da43da3686c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/4e3b8b9464d511eccbefe07cef94c275bce7e434",
-                "reference": "4e3b8b9464d511eccbefe07cef94c275bce7e434",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/fb3f5917781cf95863d3fd4d2595da43da3686c1",
+                "reference": "fb3f5917781cf95863d3fd4d2595da43da3686c1",
                 "shasum": ""
             },
             "require": {
-                "php": "~5.5|~7.0"
+                "php": ">=5.3.2"
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8|~5.0",
-                "predis/predis": "~1.0"
+                "phpunit/phpunit": ">=3.7",
+                "predis/predis": "~1.0",
+                "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.5.x-dev"
                 }
             },
             "autoload": {
@@ -142,7 +192,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2016-03-11 16:30:04"
+            "time": "2015-12-19 05:04:23"
         },
         {
             "name": "doctrine/collections",
@@ -150,16 +200,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "4a9f909f73a2f70be8cd8cdd5b72ce376f21db26"
+                "reference": "315485ae4bc22affb75be25709740949460b851a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/4a9f909f73a2f70be8cd8cdd5b72ce376f21db26",
-                "reference": "4a9f909f73a2f70be8cd8cdd5b72ce376f21db26",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/315485ae4bc22affb75be25709740949460b851a",
+                "reference": "315485ae4bc22affb75be25709740949460b851a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "^5.3.2 || ^7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
@@ -208,7 +258,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2016-04-28 05:33:48"
+            "time": "2016-06-16 12:51:43"
         },
         {
             "name": "doctrine/common",
@@ -285,21 +335,21 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "dev-master",
+            "version": "2.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "1c6f63dff60f1f8c073087833edae2da96d37287"
+                "reference": "9e1300bffb9cae048705bb4ed39c19f33e6896d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1c6f63dff60f1f8c073087833edae2da96d37287",
-                "reference": "1c6f63dff60f1f8c073087833edae2da96d37287",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/9e1300bffb9cae048705bb4ed39c19f33e6896d6",
+                "reference": "9e1300bffb9cae048705bb4ed39c19f33e6896d6",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.4",
-                "php": ">=5.4"
+                "doctrine/common": ">=2.4,<2.7-dev",
+                "php": ">=5.3.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*",
@@ -314,7 +364,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -352,7 +402,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-05-09 19:16:16"
+            "time": "2016-01-23 14:30:23"
         },
         {
             "name": "doctrine/inflector",
@@ -531,23 +581,23 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "dev-master",
+            "version": "2.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "b3aa8254e480926adeb2a2df30a0b0ac8328d639"
+                "reference": "aa5820309e80e746411100f073b8bf0a0a684082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b3aa8254e480926adeb2a2df30a0b0ac8328d639",
-                "reference": "b3aa8254e480926adeb2a2df30a0b0ac8328d639",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/aa5820309e80e746411100f073b8bf0a0a684082",
+                "reference": "aa5820309e80e746411100f073b8bf0a0a684082",
                 "shasum": ""
             },
             "require": {
                 "doctrine/cache": "~1.4",
                 "doctrine/collections": "~1.2",
                 "doctrine/common": ">=2.5-dev,<2.7-dev",
-                "doctrine/dbal": ">=2.5-dev,<2.7-dev",
+                "doctrine/dbal": ">=2.5-dev,<2.6-dev",
                 "doctrine/instantiator": "~1.0.1",
                 "ext-pdo": "*",
                 "php": ">=5.4",
@@ -561,7 +611,8 @@
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
             "bin": [
-                "bin/doctrine"
+                "bin/doctrine",
+                "bin/doctrine.php"
             ],
             "type": "library",
             "extra": {
@@ -570,8 +621,8 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Doctrine\\ORM\\": "lib/Doctrine/ORM"
+                "psr-0": {
+                    "Doctrine\\ORM\\": "lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -594,10 +645,6 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com"
-                },
-                {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com"
                 }
             ],
             "description": "Object-Relational-Mapper for PHP",
@@ -606,7 +653,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2016-05-13 02:47:26"
+            "time": "2016-06-19 10:48:28"
         },
         {
             "name": "itephp/doctrine-bridge",
@@ -648,16 +695,16 @@
         },
         {
             "name": "itephp/framework",
-            "version": "0.1.7",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itephp/framework.git",
-                "reference": "607ed4f13763a3f75a2daac473612d1a9a8da99a"
+                "reference": "45f0be63d1904a146832162a26a30fb5dc251e6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itephp/framework/zipball/607ed4f13763a3f75a2daac473612d1a9a8da99a",
-                "reference": "607ed4f13763a3f75a2daac473612d1a9a8da99a",
+                "url": "https://api.github.com/repos/itephp/framework/zipball/45f0be63d1904a146832162a26a30fb5dc251e6d",
+                "reference": "45f0be63d1904a146832162a26a30fb5dc251e6d",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +727,7 @@
                 }
             ],
             "description": "The ItePHP framework.",
-            "time": "2016-05-14 17:37:09"
+            "time": "2016-07-02 11:48:03"
         },
         {
             "name": "itephp/tcpdf-bridge",
@@ -762,12 +809,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PHPExcel.git",
-                "reference": "12590bbf1e5f82562085a70b48ee377e428dfaff"
+                "reference": "1702d953330b40d4ab6a49aa837ea5dee4c4d151"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/12590bbf1e5f82562085a70b48ee377e428dfaff",
-                "reference": "12590bbf1e5f82562085a70b48ee377e428dfaff",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/1702d953330b40d4ab6a49aa837ea5dee4c4d151",
+                "reference": "1702d953330b40d4ab6a49aa837ea5dee4c4d151",
                 "shasum": ""
             },
             "require": {
@@ -826,30 +873,30 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2016-05-14 08:29:38"
+            "time": "2016-06-05 16:03:42"
         },
         {
             "name": "symfony/console",
-            "version": "dev-master",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "8b60330aaef91db2a7252c7fc1ac8141c4cf6ce9"
+                "reference": "139e3be2f16f19babbebcaaed0f6771d98bc9307"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/8b60330aaef91db2a7252c7fc1ac8141c4cf6ce9",
-                "reference": "8b60330aaef91db2a7252c7fc1ac8141c4cf6ce9",
+                "url": "https://api.github.com/repos/symfony/console/zipball/139e3be2f16f19babbebcaaed0f6771d98bc9307",
+                "reference": "139e3be2f16f19babbebcaaed0f6771d98bc9307",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9",
+                "php": ">=5.3.9",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/event-dispatcher": "~2.8|~3.0",
-                "symfony/process": "~2.8|~3.0"
+                "symfony/event-dispatcher": "~2.1|~3.0.0",
+                "symfony/process": "~2.1|~3.0.0"
             },
             "suggest": {
                 "psr/log": "For using the console logger",
@@ -859,7 +906,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -886,7 +933,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-13 18:13:23"
+            "time": "2016-06-30 18:17:12"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -894,12 +941,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "6bab34bbffa5f5ac079fdc4a68e143f158e87b7d"
+                "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6bab34bbffa5f5ac079fdc4a68e143f158e87b7d",
-                "reference": "6bab34bbffa5f5ac079fdc4a68e143f158e87b7d",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8a6bdec191138e01c92ae026e5aacb7b3e66267d",
+                "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d",
                 "shasum": ""
             },
             "require": {
@@ -911,7 +958,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -945,7 +992,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-04-15 07:04:29"
+            "time": "2016-06-29 14:58:48"
         },
         {
             "name": "tecnickcom/tcpdf",
@@ -1016,12 +1063,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "71ad9ff322e9ef99465ccc26f704d706d76e0eea"
+                "reference": "cdccdbbdf35f38a70eb6931667a76fc68012a999"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/71ad9ff322e9ef99465ccc26f704d706d76e0eea",
-                "reference": "71ad9ff322e9ef99465ccc26f704d706d76e0eea",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/cdccdbbdf35f38a70eb6931667a76fc68012a999",
+                "reference": "cdccdbbdf35f38a70eb6931667a76fc68012a999",
                 "shasum": ""
             },
             "require": {
@@ -1069,7 +1116,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-05-13 19:46:43"
+            "time": "2016-06-24 05:05:43"
         }
     ],
     "packages-dev": [],

@@ -7,6 +7,16 @@ use ItePHP\Component\Form\FormField;
 
 class BootstrapFormFormatter implements FormFormatter{
 
+	private $buttons=array();
+
+	public function addButton($label,$class,$name){
+		$this->buttons[]=array(
+			'label'=>$label,
+			'class'=>$class,
+			'name'=>$name,
+			);
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -73,22 +83,20 @@ class BootstrapFormFormatter implements FormFormatter{
 		if(!isset($tags['class'])){
 			$tags['class']='';
 		}
-		$extraButtons=array();
-		if(isset($tags['extraButtons'])){
-			$extraButtons=$tags['extraButtons'];
-			unset($tags['extraButtons']);
-		}
 
 		$tags['class'].=' btn btn-danger';
 
 		$button='<BUTTON ';
+		$label=$tags['value'];
+		unset($tags['value']);
 		foreach($tags as $kTag=>$tag){
 			if($tag!='')
 				$button.=$kTag.'="'.$tag.'" ';
 		}
-		$button.='>Apply</BUTTON>';
-		foreach($extraButtons as $buttonOpt){
-			$button.='<BUTTON class="btn btn-default '.$buttonOpt['class'].'"';
+		$button.='name="button" value="submit"';
+		$button.='>'.$label.'</BUTTON>';
+		foreach($this->buttons as $buttonOpt){
+			$button.='&nbsp;<BUTTON name="button" value="'.$buttonOpt['name'].'" class="btn btn-default '.$buttonOpt['class'].'"';
 			$button.='>'.$buttonOpt['label'].'</BUTTON>';
 
 		}

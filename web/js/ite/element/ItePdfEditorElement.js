@@ -37,6 +37,7 @@ Ite.registerElement('ItePdfEditorElement','[role="pdf-editor"]',function(helper,
 				,'fontSize':this.getAttribute('data-font-size')
 				,'maxLength':this.getAttribute('data-max-length')
 				,'space':this.getAttribute('data-space')
+				,'value':this.getAttribute('data-value')
 				,'index':index
 			});
 		});
@@ -120,6 +121,7 @@ function ItePdfEditorComponent(parent,config,editMode){
 	prv.space=0;
 	prv.exampleText='';
 	prv.editMode=editMode;
+	prv.value='';
 
 	prv.element;
 	prv.index;
@@ -135,6 +137,9 @@ function ItePdfEditorComponent(parent,config,editMode){
 		prv.callbackFocus.push(callback);
 	};
 
+	pub.setValue=function(value){
+		prv.value=value;
+	}
 
 	pub.getPage=function(){
 		return prv.page;
@@ -238,6 +243,9 @@ function ItePdfEditorComponent(parent,config,editMode){
 		if(prv.editMode){
 			element.get('input').setValue(exampleText);
 		}
+		else{
+			element.get('input').setValue(prv.value);			
+		}
 
 	};
 
@@ -277,6 +285,7 @@ function ItePdfEditorComponent(parent,config,editMode){
 		pub.setFontSize(12);
 		pub.setMaxLength(1);
 		if(config){
+			pub.setValue(config.value);
 			pub.setPage(config.page);
 			pub.setPositionX(config.positionX);
 			pub.setPositionY(config.positionY);

@@ -11,11 +11,12 @@
     ],
     "require": {
         "php": ">=5.4.0"
-        ,"itephp/framework": "^0.1"
-        ,"itephp/doctrine-bridge": "^0.1"
-        ,"itephp/twig-bridge": "^0.1"
+        ,"itephp/framework": "^0."
+        ,"itephp/doctrine-bridge": "^0."
+        ,"itephp/twig-bridge": "^0."
         ,"phpoffice/phpexcel": "^1.8"
-        ,"itephp/tcpdf-bridge": "^0.1"
+        ,"itephp/tcpdf-bridge": "^0."
+        ,"chuyskywalker/phpaes": "^1."
         },
     "autoload": {
         "psr-4": { 

@@ -5,8 +5,9 @@ LABEL Vendor="CentOS"
 LABEL License=GPLv2
 LABEL Version=2.4.6-31
 
+RUN yum -y install epel-release
 RUN yum -y update && yum clean all
-RUN yum -y install httpd php php-pdo php-pgsql php-gd ImageMagick && yum clean all
+RUN yum -y install php-composer-installers httpd php php-pdo php-pgsql php-gd php-mcrypt ImageMagick git && yum clean all
 
 COPY httpd.conf /etc/httpd/conf/httpd.conf
 COPY php.ini /etc/php.ini

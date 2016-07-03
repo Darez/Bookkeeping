@@ -7,6 +7,12 @@
 		<argument storage="url" name="id" pattern="\/form\/(\d+)(\/|)" mapper="Mapper\Form" />
 	</action>
 
+	<action controller="FormController" method="create" >
+		<route pattern="\/form\/create\/(\d+)(\/|)" />
+		<presenter class="ItePHP\Twig\Presenter" />
+		<argument storage="url" name="id" pattern="\/form\/create\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
 	<action controller="FormController" method="finish" >
 		<route pattern="\/form\/finish(\/|)" />
 		<presenter class="ItePHP\Twig\Presenter" />
@@ -15,7 +21,14 @@
 	<action controller="FormController" method="finishPdf" >
 		<route pattern="\/form\/finish\.pdf" />
 		<presenter class="ItePHP\Presenter\File" />
+		<argument storage="get" name="view" default="" />
 	</action>
+
+	<action controller="FormController" method="finishScbk" >
+		<route pattern="\/form\/finish\.scbk" />
+		<presenter class="ItePHP\Presenter\File" />
+	</action>
+
 
 	<action controller="FormController" method="image" >
 		<route pattern="\/form\/image\/\d+\/view-[0-9]+\.jpg" />

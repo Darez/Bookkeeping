@@ -3,7 +3,7 @@ Ite.route().addController('Form',function(){
 	var prv={};
 	var pub=this;
 
-	pub.index=function(){
+	pub.create=function(){
 		var pdfEditor=Ite.get('[role="pdf-editor"]');
 	};
 

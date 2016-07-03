@@ -38,4 +38,19 @@
 
 	<service name="fpdf" class="Service\TCPDFService" />
 
+	<service name="config" class="Service\ConfigService">
+		<config enviorment="dev"
+			aesKey="{aes.key}"
+			aesIV="{aes.iv}"
+		/>
+		<config enviorment="prod"
+			aesKey="{aes.key}"
+			aesIV="{aes.iv}"
+		/>
+		<config enviorment="test"
+			aesKey="{aes.key}"
+			aesIV="{aes.iv}"
+		/>
+	</service>
+
 </content>

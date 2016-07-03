@@ -17,16 +17,16 @@ namespace Service;
 use ItePHP\Contener\ServiceConfig;
 use ItePHP\Core\EventManager;
 
-require_once ITE_ROOT.'/vendor/tecnickcom/tcpdf/tcpdi.php';
-
-class TCPDFService{
+class ConfigService{
 	
-	public function __construct(ServiceConfig $serviceConfig,EventManager $eventManager){
+	private $serviceConfig;
 
+	public function __construct(ServiceConfig $serviceConfig,EventManager $eventManager){
+		$this->serviceConfig=$serviceConfig;
 	}
 
-	public function create(){
-		return new \TCPDI(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+	public function get($key){
+		return $this->serviceConfig->get($key);
 	}
 
 }
