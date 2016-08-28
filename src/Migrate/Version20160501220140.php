@@ -1,13 +1,14 @@
 <?php
 
 namespace Migrate;
-use ItePHP\Command\Migrate;
+
+use ItePHP\Core\Container;
 
 class Version20160501220140{
 	
-	public function up(Migrate $migrate){
+	public function up(Container $container){
 
-		$this->copy(ITE_ROOT.'/extend',ITE_ROOT.'/vendor/tecnickcom/tcpdf');
+		$this->copy($container->getEnvironment()->getRootPath().'/extend',$container->getEnvironment()->getRootPath().'/vendor/tecnickcom/tcpdf');
 
 		$sql="CREATE SEQUENCE forms_id_seq INCREMENT BY 1 MINVALUE 1 START 1;
 			CREATE SEQUENCE form_fields_id_seq INCREMENT BY 1 MINVALUE 1 START 1;
@@ -16,19 +17,19 @@ class Version20160501220140{
 			CREATE INDEX IDX_7C0B37265FF69B7D ON form_fields (form_id);
 			ALTER TABLE form_fields ADD CONSTRAINT FK_7C0B37265FF69B7D FOREIGN KEY (form_id) REFERENCES forms (id) NOT DEFERRABLE INITIALLY IMMEDIATE;";
 
-		$stmt=$migrate->getConnection();
+		$stmt=$container->getService('doctrine')->getEntityManager()->getConnection();
 		$stmt->exec($sql);
 
 	}
 
-	public function down(Migrate $migrate){
+	public function down(Container $container){
 
 		$sql="DROP SEQUENCE forms_id_seq;
 			DROP SEQUENCE form_fields_id_seq;
 			DROP TABLE form_fields;
 			DROP TABLE forms;";
 
-		$stmt=$migrate->getConnection();
+        $stmt=$container->getService('doctrine')->getEntityManager()->getConnection();
 		$stmt->exec($sql);
 
 	}

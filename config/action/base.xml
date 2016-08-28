@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
 
 <content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<error pattern=".*" presenter="twig" />
+	<action class="Controller\BaseController" method="index" route="\/(\/|)" presenter="twig" />
+
+
 </content>

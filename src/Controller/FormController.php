@@ -1,25 +1,30 @@
 <?php
 
 namespace Controller;
+use Entity\Form;
+use ItePHP\Action\ValueNotFoundException;
+use ItePHP\Component\Form\FileUploaded;
+use ItePHP\Component\Form\FormBuilder;
 use ItePHP\Core\Controller;
 use ItePHP\Component\Form\TextField;
 use ItePHP\Component\Form\FileField;
 use Formatter\PdfEditorFormFormatter;
-use ItePHP\Exception\ValueNotFoundException;
-use ItePHP\Provider\Response;
-use Formatter\BasicGridFormatter;
-use Manager\BasicDataManager;
-use Formatter\ActionColumnFormatter;
-use ItePHP\Component\Grid\Column;
 use Formatter\BootstrapFormFormatter;
 
+use ItePHP\Core\Response;
 use phpaes\PKCS7;
 use phpaes\AES_CBC_Mcrypt;
-use phpaes\Util;
 
-
+/**
+ * Class FormController
+ * @package Controller
+ */
 class FormController extends Controller{
 
+    /**
+     * @param Form $entity
+     * @return array
+     */
 	public function index($entity){
 		$form=$this->createUploadForm($entity);
 		if(!$form->isValid()){
@@ -37,8 +42,13 @@ class FormController extends Controller{
 			$form->getField('file')->setError('Required file.');
 			return compact('form');
 		}
-		$dir=ITE_ROOT.'/cache/'.$request->getSession()->getId();
-		$data['file']->save($dir,'metadata.scbk');
+		$dir=$this->getEnvironment()->getCachePath().'/'.$request->getSession()->getId();
+
+        /**
+         * @var FileUploaded $file
+         */
+        $file=$data['file'];
+		$file->save($dir,'metadata.scbk');
 
 		$aescbc=$this->getAESEncoder();
 		$jsonData  = json_decode($aescbc->decrypt(file_get_contents($dir.'/metadata.scbk')),true);
@@ -58,7 +68,11 @@ class FormController extends Controller{
 		return $this->redirect('/form/create/'.$entity->getId());
 
 	}
-	
+
+    /**
+     * @param Form $entity
+     * @return mixed
+     */
 	public function create($entity){
 		$values=array();
 		try{
@@ -72,7 +86,6 @@ class FormController extends Controller{
 		$previewForm=$this->createForm();
 		$validForm=$this->createForm();
 
-		$fields=$entity->getFields();
 		$fieldMap=array();
 		foreach($entity->getFields() as $kField=>$field){
 			$previewForm->addField(new TextField(array(
@@ -99,14 +112,18 @@ class FormController extends Controller{
 		}
 
 		$data=$validForm->getData();
+
+        /**
+         * @var TCPDI $pdf
+         */
 		$pdf =$this->getService('fpdf')->create();
 
 		//Set the source PDF file
 		$pagecount = $pdf->setSourceFile($entity->getDir().'/raw.pdf');
 		// $fontname = \TCPDF_FONTS::addTTFfont(__DIR__.'/../web/fonts/cousine/Cousine-Regular.ttf');
 		for($i=1; $i<=$pagecount; $i++){
-			$pdf->SetPrintHeader(false);
-			$pdf->SetPrintFooter(false);
+			$pdf->setPrintHeader(false);
+			$pdf->setPrintFooter(false);
 			$pdf->SetAutoPageBreak(TRUE, 0);
 			$pdf->AddPage();
 			$tpl = $pdf->importPage($i);
@@ -115,7 +132,7 @@ class FormController extends Controller{
 			$this->preparePage($pdf,$i,$fieldMap,$data['field']);
 		}
 
-		$dir=ITE_ROOT."/cache/".$this->getRequest()->getSession()->getId();
+		$dir=$this->getEnvironment()->getCachePath()."/".$this->getRequest()->getSession()->getId();
 		if(!file_exists($dir)){
 			mkdir($dir,0777,true);
 		}
@@ -126,19 +143,27 @@ class FormController extends Controller{
 		return $this->redirect('/form/finish');
 	}
 
+    /**
+     * @return AES_CBC_Mcrypt
+     */
 	private function getAESEncoder(){
 		$pkcs7 = new PKCS7();
 		$aescbc = new AES_CBC_Mcrypt($pkcs7);
-		$util   = new Util();
-		$aescbc->setKey($this->getService('config')->get('aesKey'));
-		$aescbc->setIv($this->getService('config')->get('aesIV'));
+        $aesNode=$this->getConfig()->getNodes('aes');
+        $aesNode=$aesNode[0];
+		$aescbc->setKey($aesNode->getAttribute('key'));
+		$aescbc->setIv($aesNode->getAttribute('iv'));
 
 		return $aescbc;
 
 	}
 
+    /**
+     * @param Form $form
+     * @param array $fields
+     */
 	private function saveMetadata($form,$fields){
-		$dir=ITE_ROOT."/cache/".$this->getRequest()->getSession()->getId();
+		$dir=$this->getEnvironment()->getCachePath()."/".$this->getRequest()->getSession()->getId();
 		$data=array();
 		$data['form']=$form->getId();
 		$data['data']=$fields;
@@ -154,16 +179,21 @@ class FormController extends Controller{
 
 	}
 
+    /**
+     * @return FormBuilder
+     */
 	private function createForm(){
-		$form=$this->getService('form')->create();
-		$form->setValidatorService($this->getService('validator'));
+		$form=$this->getService('form');
 		$form->setFormatter(new PdfEditorFormFormatter());
 		return $form;
 	}
 
+    /**
+     * @param Form $entity
+     * @return object
+     */
 	private function createUploadForm($entity){
-		$build=$this->getService('form')->create();
-		$build->setValidatorService($this->getService('validator'));
+		$build=$this->getService('form');
 		$formatter=new BootstrapFormFormatter();
 		$formatter->addButton('Create manualy','default','create');
 		$build->setFormatter($formatter);
@@ -179,6 +209,10 @@ class FormController extends Controller{
 
 	}
 
+    /**
+     * @param Form $entity
+     * @return array
+     */
 	private function getViewFile($entity){
 		$opendir=opendir($entity->getDir());
 		while($readdir=readdir($opendir)){
@@ -207,7 +241,7 @@ class FormController extends Controller{
 	}
 
 	public function finishPdf($view){
-		$file=ITE_ROOT."/cache/".$this->getRequest()->getSession()->getId().'/output.pdf';
+		$file=$this->getEnvironment()->getCachePath()."/".$this->getRequest()->getSession()->getId().'/output.pdf';
 
 		$response=new Response();
 		$response->setHeader('Content-Type','application/pdf');
@@ -219,7 +253,7 @@ class FormController extends Controller{
 	}
 
 	public function finishScbk(){
-		$file=ITE_ROOT."/cache/".$this->getRequest()->getSession()->getId().'/metadata.scbk';
+		$file=$this->getEnvironment()->getCachePath()."/".$this->getRequest()->getSession()->getId().'/metadata.scbk';
 
 		$response=new Response();
 		$response->setHeader('Content-Type','application/scbk');
@@ -228,6 +262,11 @@ class FormController extends Controller{
 		return $response;
 	}
 
+    /**
+     * @param Form $entity
+     * @param string $image
+     * @return Response
+     */
 	public function image($entity,$image){
 		$dir=$entity->getDir();
 		$response=new Response();
@@ -235,11 +274,17 @@ class FormController extends Controller{
 		return $response;
 	}
 
-	private function preparePage($pdf,$page,$fieldMap,$data){
+    /**
+     * @param TCPDI $pdf
+     * @param int $page
+     * @param array $fieldMaps
+     * @param array $data
+     */
+	private function preparePage($pdf,$page,$fieldMaps,$data){
 		//scale
 		$scale=$pdf->getPageWidth()/595;
 		// echo $scale; exit;
-		foreach($fieldMap as $index=>$fieldMap){
+		foreach($fieldMaps as $index=>$fieldMap){
 			if($fieldMap->getPage()!=$page){
 				continue;
 			}

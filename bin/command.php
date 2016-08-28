@@ -13,20 +13,23 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-define('ITE_ROOT', dirname(__DIR__));
-define('ITE_WEB', ITE_ROOT.'/web');
-define('ITE_SRC', ITE_ROOT.'/src');
+$rootPath=dirname(__DIR__);
 
-require_once ITE_ROOT.'/vendor/autoload.php';
+require_once $rootPath.'/vendor/autoload.php';
 
 array_shift($argv);
+
 $env='prod';
 $debug=false;
-if(file_exists(__DIR__.'/../dev')){
+if(file_exists($rootPath.'/dev')){
 	$env='dev';
 	$debug=true;
 }
-$root=new \ItePHP\Root($debug,true,$env);
+
+$environment=new \ItePHP\Core\Environment($debug,false,$env,$rootPath);
+
+
+$root=new \ItePHP\Root($environment);
 $sigint=$root->executeCommand($argv);
 
 exit($sigint);

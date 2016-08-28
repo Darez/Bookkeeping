@@ -14,18 +14,20 @@
  */
 namespace Service;
 
-use ItePHP\Contener\ServiceConfig;
-use ItePHP\Core\EventManager;
-
-require_once ITE_ROOT.'/vendor/tecnickcom/tcpdf/tcpdi.php';
+use ItePHP\Core\Environment;
 
 class TCPDFService{
-	
-	public function __construct(ServiceConfig $serviceConfig,EventManager $eventManager){
 
-	}
+    /**
+     * TCPDFService constructor.
+     * @param Environment $environment
+     */
+    public function __construct(Environment $environment)
+    {
+        require_once $environment->getVendorPath().'/tecnickcom/tcpdf/tcpdi.php';
+    }
 
-	public function create(){
+    public function create(){
 		return new \TCPDI(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 	}
 

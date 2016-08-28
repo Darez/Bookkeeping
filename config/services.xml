@@ -1,56 +1,37 @@
 <?xml version="1.0" ?>
 
 <content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-	<service name="doctrine" class="ItePHP\Doctrine\Service" >
-		<config enviorment="dev"
-			driver="{prod.database.driver}"
-			host="{prod.database.host}"
-			user="{prod.database.user}"
-			password="{prod.database.password}"
-			dbname="{prod.database.dbname}"
-		 />
-		<config enviorment="prod"
-			driver="{prod.database.driver}"
-			host="{prod.database.host}"
-			user="{prod.database.user}"
-			password="{prod.database.password}"
-			dbname="{prod.database.dbname}"
-		 />
-		<config enviorment="test"
-			driver="{test.database.driver}"
-			host="{test.database.host}"
-			user="{test.database.user}"
-			password="{test.database.password}"
-			dbname="{test.database.dbname}"
-		 />
-
+	<service name="doctrine" class="ItePHP\Doctrine\DoctrineService">
+		<method name="__construct">
+			<argument type="reference" value="environment" />
+			<argument type="reference" value="eventManager" />
+			<argument type="primitive" value="@db.driver" />
+			<argument type="primitive" value="@db.username" />
+			<argument type="primitive" value="@db.password" />
+			<argument type="primitive" value="@db.name" />
+			<argument type="primitive" value="@db.host" />
+			<argument type="primitive" value="@db.host" />
+			<argument type="primitive" value="@db.port" />
+		</method>
+	</service>
+	<service name="validator" class="ItePHP\Core\ValidatorService" />
+	<service name="twig" class="ItePHP\Twig\TwigService" />
+	<service name="mapper" class="ItePHP\Core\MapperService">
+		<method name="__construct">
+			<argument type="reference" value="container" />
+		</method>
+	</service>
+	<service name="form" class="ItePHP\Component\Form\FormBuilder" singleton="false" />
+	<service name="grid" class="ItePHP\Component\Grid\GridBuilder" singleton="false">
+		<method name="__construct">
+			<argument type="reference" value="request" />
+		</method>
 	</service>
 
-
-	<service name="twig" class="ItePHP\Twig\Service">
-	</service>
-
-	<service name="validator" class="ItePHP\Service\Validator" />
-	<service name="mapper" class="ItePHP\Service\Mapper" />
-	<service name="form" class="ItePHP\Service\Form" />
-	<service name="grid" class="ItePHP\Service\Grid" />
-
-	<service name="fpdf" class="Service\TCPDFService" />
-
-	<service name="config" class="Service\ConfigService">
-		<config enviorment="dev"
-			aesKey="{aes.key}"
-			aesIV="{aes.iv}"
-		/>
-		<config enviorment="prod"
-			aesKey="{aes.key}"
-			aesIV="{aes.iv}"
-		/>
-		<config enviorment="test"
-			aesKey="{aes.key}"
-			aesIV="{aes.iv}"
-		/>
+	<service name="fpdf" class="Service\TCPDFService">
+		<method name="__construct">
+			<argument type="reference" value="environment" />
+		</method>
 	</service>
 
 </content>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<command name="migrate:update" class="ItePHP\Command\Migrate" method="update" />
+	<command name="migrate:downgrade" class="ItePHP\Command\Migrate" method="downgrade" />
+	<command name="migrate:create" class="ItePHP\Command\Migrate" method="create" />
+	<command name="crud:create" class="Command\Crud" method="create" />
+	<command name="queueEmail:send" class="Command\QueueEmailCommand" method="send" />
+
+</content>

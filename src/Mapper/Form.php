@@ -1,23 +1,24 @@
 <?php
 
 namespace Mapper;
-use ItePHP\Core\Mapper;
 use Exception\FormNotFoundException;
+use ItePHP\Mapper\MapperAbstract;
 
 /**
  * Cast id to Entity\Form
  *
  * @package Mapper
  */
-class Form extends Mapper{
+class Form extends MapperAbstract {
 	
 	/**
 	 * {@inheritdoc}
 	 */
 	public function cast($value){
-		$entity=$this->getService('doctrine')->getEntityManager()->getRepository('Entity\Form')->findOneById($value);
-		if(!$entity)
-			throw new FormNotFoundException();
+		$entity=$this->container->getService('doctrine')->getEntityManager()->getRepository('Entity\Form')->findOneById($value);
+		if(!$entity){
+            throw new FormNotFoundException();
+        }
 
 		return $entity;
 	}

@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<variable name="prod.database.driver" value="pdo_pgsql" />
+	<variable name="prod.database.host" value="bookkeeping-pgsql" />
+	<variable name="prod.database.user" value="root" />
+	<variable name="prod.database.password" value="password" />
+	<variable name="prod.database.dbname" value="db" />
+
+	<variable name="test.database.driver" value="pdo_mysql" />
+	<variable name="test.database.host" value="idealna-ekspozycja-mysql" />
+	<variable name="test.database.user" value="root" />
+	<variable name="test.database.password" value="password" />
+	<variable name="test.database.dbname" value="dev" />
+
+	<variable name="mail.host" value="localhost" />
+	<variable name="mail.port" value="587" />
+	<variable name="mail.username" value="user" />
+	<variable name="mail.password" value="password" />
+
+	<variable name="aes.key" value="jKd@cxZakwq093#@dkczScvdmJk09Klz" />
+	<variable name="aes.iv" value="djKod8^^chksa@!2" />
+
+</content>

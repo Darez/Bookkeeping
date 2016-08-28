@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="">
+	<import file="globals.xml" />
+	<import file="action/base.xml" />
+	<import file="action/form.xml" />
+	<import file="action/managment.form.xml" />
+	<import file="commands.xml" />
+	<import file="presenters.xml" />
+	<import file="services.xml" />
+	<import file="errors.xml" />
+	<import file="events.xml" />
+	<import file="snippets.xml" />
+	<import file="variables.xml" />
+</content>

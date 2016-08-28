@@ -11,10 +11,10 @@
     ],
     "require": {
         "php": ">=5.4.0"
-        ,"itephp/framework": "^0."
-        ,"itephp/doctrine-bridge": "^0."
-        ,"itephp/twig-bridge": "^0."
-        ,"phpoffice/phpexcel": "^1.8"
+        ,"itephp/framework": "^0.4."
+        ,"itephp/doctrine-bridge": "^0.2."
+        ,"itephp/twig-bridge": "^0.2."
+        ,"phpoffice/phpexcel": "^1.8."
         ,"itephp/tcpdf-bridge": "^0."
         ,"chuyskywalker/phpaes": "^1."
         },

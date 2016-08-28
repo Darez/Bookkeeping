@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<presenter name="twig" class="ItePHP\Twig\TwigPresenter">
+		<method name="__construct">
+			<argument type="reference" value="environment" />
+		</method>
+	</presenter>
+	<presenter name="json" class="ItePHP\Presenter\JSON">
+		<method name="__construct">
+			<argument type="reference" value="environment" />
+		</method>
+	</presenter>
+	<presenter name="file" class="ItePHP\Presenter\File">
+		<method name="__construct">
+			<argument type="reference" value="environment" />
+		</method>
+	</presenter>
+</content>

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<variable name="db.driver" value="pg_sql" />
+	<variable name="db.host" value="localhost" />
+	<variable name="db.port" value="5432" />
+	<variable name="db.username" value="root" />
+	<variable name="db.password" value="password" />
+	<variable name="db.name" value="db" />
+</content>

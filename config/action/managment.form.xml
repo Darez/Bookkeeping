@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<action class="Controller\Managment\FormController" method="index" presenter="twig" route="\/managment\/form(\/|)" />
+
+	<action class="Controller\Managment\FormController" method="add" presenter="twig" route="\/managment\/form\/add(\/|)" />
+
+	<action class="Controller\Managment\FormController" method="addFinish" presenter="twig" route="\/managment\/form\/add\/finish(\/|)" />
+
+	<action class="Controller\Managment\FormController" method="edit" presenter="twig" route="\/managment\/form\/edit\/(\d+)(\/|)">
+		<argument storage="url" name="id" pattern="\/managment\/form\/edit\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+	<action class="Controller\Managment\FormController" method="editFinish" presenter="twig" route="\/managment\/form\/edit\/finish(\/|)" />
+
+	<action class="Controller\Managment\FormController" method="addFinish" presenter="twig" route="\/managment\/form\/add\/finish(\/|)" />
+
+	<action class="Controller\Managment\FormController" method="addFinishImage" presenter="file" route="\/managment\/form\/add\/finish\/image\/view-[0-9]+\.jpg(\/|)">
+		<argument storage="url" name="id" pattern="\/managment\/form\/add\/finish\/image\/(view-[0-9]+\.jpg)(\/|)" />
+	</action>
+
+	<action class="Controller\Managment\FormController" method="remove" presenter="twig" route="\/managment\/form\/remove\/(\d+)(\/|)">
+		<argument storage="url" name="id" pattern="\/managment\/form\/remove\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+
+</content>

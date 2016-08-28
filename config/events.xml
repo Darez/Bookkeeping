@@ -1,10 +1,22 @@
 <?xml version="1.0" ?>
 
 <content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-    <event bind="executeAction" class="ItePHP\Event\Argument" method="onExecuteAction" />
-    <event bind="executeAction" class="ItePHP\Event\Authenticate" method="onExecuteAction"/>
-    <event bind="executePresenter" class="Event\AppendRequest" method="onExecutePresenter"/>
-    <event bind="executePresenter" class="Event\AppendForm" method="onExecutePresenter"/>
-
+	<event class="ItePHP\Action\ArgumentEvent">
+		<method name="__construct">
+			<argument type="reference" value="container" />
+		</method>		
+		<bind name="executeAction" method="onExecuteAction" />
+	</event>
+	<event class="ItePHP\Action\AuthenticateEvent">
+		<method name="__construct">
+			<argument type="reference" value="config" />
+		</method>
+		<bind name="executeAction" method="onExecuteAction" />
+	</event>
+	<event class="Event\AppendForm">
+		<method name="__construct">
+			<argument type="reference" value="service.doctrine" />
+		</method>
+		<bind name="executePresenter" method="onExecutePresenter" />
+	</event>
 </content>

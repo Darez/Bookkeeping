@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<action class="Controller\FormController" method="index" route="\/form\/(\d+)(\/|)" presenter="twig">
+		<argument storage="url" name="id" pattern="\/form\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+	<action class="Controller\FormController" method="create" route="\/form\/create\/(\d+)(\/|)" presenter="twig">
+		<argument storage="url" name="id" pattern="\/form\/create\/(\d+)(\/|)" mapper="Mapper\Form" />
+	</action>
+
+	<action class="Controller\FormController" method="finish" presenter="twig" route="\/form\/finish(\/|)" />
+
+	<action class="Controller\FormController" method="finishPdf" presenter="file" route="\/form\/finish\.pdf">
+		<argument storage="get" name="view" default="" />
+	</action>
+
+	<action class="Controller\FormController" method="finishScbk" presenter="file" route="\/form\/finish\.scbk" />
+
+	<action class="Controller\FormController" method="image" presenter="file" route="\/form\/image\/\d+\/view-[0-9]+\.jpg">
+		<argument storage="url" name="form" pattern="\/form\/image\/(\d+)\/(view-[0-9]+\.jpg)" mapper="Mapper\Form" />
+		<argument storage="url" name="image" pattern="\/form\/image\/\d+\/(view-[0-9]+\.jpg)" />
+	</action>
+
+</content>
