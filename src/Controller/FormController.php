@@ -114,9 +114,9 @@ class FormController extends Controller{
 		$data=$validForm->getData();
 
         /**
-         * @var TCPDI $pdf
+         * @var \TCPDI $pdf
          */
-		$pdf =$this->getService('fpdf')->create();
+		$pdf =$this->getService('fpdf');
 
 		//Set the source PDF file
 		$pagecount = $pdf->setSourceFile($entity->getDir().'/raw.pdf');

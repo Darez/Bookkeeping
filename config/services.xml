@@ -28,10 +28,16 @@
 		</method>
 	</service>
 
-	<service name="fpdf" class="Service\TCPDFService">
+	<service name="fpdf" class="\TCPDI">
 		<method name="__construct">
-			<argument type="reference" value="environment" />
+			<argument type="static" value="PDF_PAGE_ORIENTATION" />
+			<argument type="static" value="PDF_UNIT" />
+			<argument type="static" value="PDF_PAGE_FORMAT" />
+			<argument type="primitive" value="!true" />
+			<argument type="primitive" value="UTF-8" />
+			<argument type="primitive" value="!false" />
 		</method>
 	</service>
+
 
 </content>

@@ -23,6 +23,6 @@
             "": "src/"
             ,"Test\\": "test/"
         }
-    },
-    "minimum-stability": "dev"
+        ,"files": ["vendor/tecnickcom/tcpdf/tcpdi.php"]
+    }
 }
